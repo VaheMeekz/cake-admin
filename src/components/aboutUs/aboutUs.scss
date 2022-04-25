@@ -1,0 +1,29 @@
+.textareaText {
+  border: 1px solid gray;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+.hrLine {
+  width: 20%;
+  color: black;
+  margin-top: 15px;
+}
+
+.inputBoxs input {
+  margin: 10px;
+}
+
+.btnsBox{
+  display: flex;
+}
+
+.btnsBox div{
+  margin: 10px;
+}
+
+.addInp{
+  margin: 10px !important;
+}

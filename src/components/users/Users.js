@@ -17,7 +17,6 @@ import { makeArray } from "../../helpers/makeArray";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { Button } from "@mui/material";
 import axios from "axios";
@@ -26,7 +25,7 @@ import Swal from "sweetalert2";
 
 const Users = () => {
   const dispatch = useDispatch();
-  const [limit, setLimit] = useState(2);
+  const limit= 5;
   const [currentId, setCurrentId] = useState(null);
   const [data, setData] = useState(null);
   const [page, setPage] = useState(0);
@@ -88,7 +87,7 @@ const Users = () => {
   return (
     <Box m={3}>
       <h2 mt={3} mb={3}>
-        Users
+        Users Settings
       </h2>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">

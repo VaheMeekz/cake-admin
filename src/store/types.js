@@ -1,2 +1,11 @@
-export const CHANGE_AUTH = "CHANGE_AUTH"
-export const GET_USERS = "GET_USERS"
+export const CHANGE_AUTH = "CHANGE_AUTH";
+export const GET_USERS = "GET_USERS";
+export const GET_ABOUT_US = "GET_ABOUT_US";
+export const GET_ABOUT_US_INFO = "GET_ABOUT_US_INFO";
+export const GET_CONTACTS = "contactUsReducer";
+export const GET_SUBSCRIBERS = "subscribersReducer";
+export const GET_INFO = "GET_INFO";
+export const GET_HOME_BANNER = "GET_HOME_BANNER";
+export const GET_ABOUT_US_BANNER = "GET_ABOUT_US_BANNER";
+export const GET_CATEGORY = 'GET_CATEGORY'
+export const GET_PRODUCTS = 'GET_PRODUCTS'
