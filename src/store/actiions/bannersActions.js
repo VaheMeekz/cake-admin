@@ -1,6 +1,12 @@
 import axios from "axios";
 import { baseUrl } from "../../api/userApi";
-import { GET_HOME_BANNER,GET_ABOUT_US_BANNER } from "../types";
+import {
+  GET_HOME_BANNER,
+  GET_ABOUT_US_BANNER,
+  GET_TERMS_BANNER,
+  GET_DELEVERY_BANNER,
+  GET_PRODUCT_BANNER, GET_WISH_BANNER, GET_BASKET_BANNER, GET_DETAIL_BANNER
+} from "../types";
 
 export const getHomeBannerThunk = () => {
   return async (dispatch) => {
@@ -22,6 +28,67 @@ export const getAboutUsBannerThunk = () => {
     })
   }
 }
+export const getTermsBannerThunk = () => {
+  return async (dispatch) => {
+    const response = await axios.get(`${baseUrl}/terms`);
+    dispatch({
+      type:GET_TERMS_BANNER,
+      payload:response.data[0]
+    })
+  }
+}
+
+export const getDeleveryBannerThunk = () => {
+  return async (dispatch) => {
+    const response = await axios.get(`${baseUrl}/delevery`);
+    dispatch({
+      type:GET_DELEVERY_BANNER,
+      payload:response.data[0]
+    })
+  }
+}
+
+export const getProductBannerThunk = () => {
+  return async (dispatch) => {
+    const response = await axios.get(`${baseUrl}/productBanner`);
+    dispatch({
+      type:GET_PRODUCT_BANNER,
+      payload:response.data[0]
+    })
+  }
+}
+
+export const getWishBannerThunk = () => {
+  return async (dispatch) => {
+    const response = await axios.get(`${baseUrl}/wishBanner`);
+    dispatch({
+      type:GET_WISH_BANNER,
+      payload:response.data[0]
+    })
+  }
+}
+
+export const getBannerBannerThunk = () => {
+  return async (dispatch) => {
+    const response = await axios.get(`${baseUrl}/basketBanner`);
+    dispatch({
+      type:GET_BASKET_BANNER,
+      payload:response.data[0]
+    })
+  }
+}
+
+export const getDetailBannerThunk = () => {
+  return async (dispatch) => {
+    const response = await axios.get(`${baseUrl}/detailBanner`);
+    dispatch({
+      type:GET_DETAIL_BANNER,
+      payload:response.data[0]
+    })
+  }
+}
+
+
 
 
 

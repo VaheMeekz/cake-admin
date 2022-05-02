@@ -97,15 +97,17 @@ const Subscribers = () => {
       <h2 mt={3} mb={3}>
         Subscribers
       </h2>
-      <Button
-        mt={3}
-        variant="contained"
-        onClick={() => {
-          setOpen(true);
-        }}
-      >
-        Send Message
-      </Button>
+      <div style={{margin:"10px 0 10px 0"}}>
+        <Button
+          mt={3}
+          variant="contained"
+          onClick={() => {
+            setOpen(true);
+          }}
+        >
+          Send Message
+        </Button>
+      </div>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
@@ -125,7 +127,7 @@ const Subscribers = () => {
             {data !== null &&
               data.map((row, index) => (
                 <TableRow
-                  key={row.name}
+                  key={index}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">

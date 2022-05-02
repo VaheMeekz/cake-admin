@@ -180,8 +180,8 @@ const AboutBanner = () => {
         .catch(function (error) {
           console.log(error);
         });
-    }else{
-      alert("wait!")
+    } else {
+      Swal.fire("wait!");
     }
   };
   return (

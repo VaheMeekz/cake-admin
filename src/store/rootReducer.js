@@ -8,6 +8,12 @@ import { infoReducer } from "./reducers/infoReducer";
 import { bannersReducer } from "./reducers/bannersReducer";
 import { categoryReducer } from "./reducers/categoryReducer";
 import { productReducer } from "./reducers/productReducer";
+import {orderReducer} from "./reducers/orderReducer"
+import {deleveryReducer} from "./reducers/deleveryReducer";
+import {footersReducer} from "./reducers/footerReducer";
+import {chooseReducer} from "./reducers/chooseReducer";
+import {jurisReducer} from "./reducers/jurisReducer";
+
 export const rootReducer = combineReducers({
   isAuthReducer,
   usersReducer,
@@ -18,4 +24,9 @@ export const rootReducer = combineReducers({
   bannersReducer,
   categoryReducer,
   productReducer,
+  orderReducer,
+  deleveryReducer,
+  footersReducer,
+  chooseReducer,
+  jurisReducer
 });

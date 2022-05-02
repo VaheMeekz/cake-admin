@@ -12,6 +12,7 @@ function App() {
   useEffect(()=>{
     token !== null && dispatch(thchangeAuAC(true));
   },[])
+
   return (
     <div className={darkMode ? "app dark" : "app"}>
      <Home/>

@@ -16,7 +16,6 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { makeArray } from "../../helpers/makeArray";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { Button } from "@mui/material";
 import axios from "axios";
@@ -25,7 +24,7 @@ import Swal from "sweetalert2";
 
 const Users = () => {
   const dispatch = useDispatch();
-  const limit= 5;
+  const limit = 10;
   const [currentId, setCurrentId] = useState(null);
   const [data, setData] = useState(null);
   const [page, setPage] = useState(0);
@@ -33,9 +32,6 @@ const Users = () => {
   const users = useSelector((state) => state?.usersReducer.users);
   const count = useSelector((state) => state?.usersReducer.count);
   const [open, setOpen] = React.useState(false);
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
   const handleClose = () => {
     setOpen(false);
   };
@@ -84,6 +80,9 @@ const Users = () => {
       });
   };
 
+  useEffect(()=>console.clear(),[data])
+
+
   return (
     <Box m={3}>
       <h2 mt={3} mb={3}>
@@ -111,7 +110,7 @@ const Users = () => {
             {data !== null &&
               data.map((row, index) => (
                 <TableRow
-                  key={row.name}
+                  key={row.id}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
@@ -146,11 +145,11 @@ const Users = () => {
             ) : null}
           </div>
           {pages.length > 1 &&
-            pages.map((s) => {
+            pages.map((s,index) => {
               return (
                 <div
-                  className={page === s ? "ActivePagItem" : "pagItem"}
-                  key={s}
+                    key={index}
+                    className={page === s ? "ActivePagItem" : "pagItem"}
                   onClick={() => {
                     setPage(s);
                   }}
@@ -176,11 +175,10 @@ const Users = () => {
           aria-describedby="alert-dialog-description"
         >
           <DialogTitle id="alert-dialog-title">{"Delate?"}</DialogTitle>
-          <DialogContent></DialogContent>
           <DialogActions>
-            <Button onClick={handleClose}>Disagree</Button>
+            <Button onClick={handleClose}>No</Button>
             <Button onClick={handleDeleteUser} autoFocus>
-              Agree
+              Yes
             </Button>
           </DialogActions>
         </Dialog>

@@ -102,37 +102,41 @@ const HomeBanner = () => {
   }, [data]);
 
   const handleChangeTexts = () => {
-    axios
-      .post(
-        `${baseUrl}/homeBanner/edit`,
-        {
-          id: 1,
-          titleHy,
-          titleEn,
-          titleRu,
-          subTitleHy,
-          subTitleRu,
-          subTitleEn,
-          image: data.image,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
+    if (thisImg !== null) {
+      axios
+        .post(
+          `${baseUrl}/homeBanner/edit`,
+          {
+            id: 1,
+            titleHy,
+            titleEn,
+            titleRu,
+            subTitleHy,
+            subTitleRu,
+            subTitleEn,
+            image: data.image,
           },
-        }
-      )
-      .then(function (response) {
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Succsess",
-          showConfirmButton: false,
-          timer: 1500,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then(function (response) {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Succsess",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        })
+        .catch(function (error) {
+          console.log(error);
         });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    } else {
+      Swal.fire("wait!");
+    }
   };
 
   const handleFile = (e) => {
