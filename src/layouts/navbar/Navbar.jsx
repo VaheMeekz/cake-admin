@@ -10,10 +10,12 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import MenuItem from '@mui/material/MenuItem';
 import {thchangeAuAC} from "../../store/actiions/authAction";
 import {useDispatch} from "react-redux";
+import {useNavigate} from "react-router-dom";
 
 const Navbar = ({ close, setClose }) => {
   const { dispatch } = useContext(DarkModeContext);
   const dis = useDispatch()
+  let navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -25,6 +27,7 @@ const Navbar = ({ close, setClose }) => {
   const handleLogOut = () => {
     dis(thchangeAuAC(false));
     localStorage.removeItem("myToken")
+    navigate('/')
   }
   return (
     <div className="navbar">
@@ -59,7 +62,7 @@ const Navbar = ({ close, setClose }) => {
                   'aria-labelledby': 'basic-button',
                 }}
             >
-              <MenuItem onClick={handleClose}><LogoutIcon/>Logout</MenuItem>
+              <MenuItem onClick={handleLogOut}><LogoutIcon/>Logout</MenuItem>
             </Menu>
           </div>
         </div>
