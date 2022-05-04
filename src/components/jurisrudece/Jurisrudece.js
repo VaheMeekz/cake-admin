@@ -1,7 +1,6 @@
 import React, {useEffect} from 'react';
 import {Box} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
-import {jurisReducer} from "../../store/reducers/jurisReducer";
 import {getDeleveryDataThunk, getTermsDataThunk} from "../../store/actiions/jurisAction";
 import Terms from "../jurispridenceComponents/Terms";
 import Delevery from "../jurispridenceComponents/Delevery";

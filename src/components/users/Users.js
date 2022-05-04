@@ -17,7 +17,7 @@ import { makeArray } from "../../helpers/makeArray";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogTitle from "@mui/material/DialogTitle";
-import { Button } from "@mui/material";
+import {Button, TextField} from "@mui/material";
 import axios from "axios";
 import { baseUrl, token } from "../../api/userApi";
 import Swal from "sweetalert2";
@@ -32,12 +32,13 @@ const Users = () => {
   const users = useSelector((state) => state?.usersReducer.users);
   const count = useSelector((state) => state?.usersReducer.count);
   const [open, setOpen] = React.useState(false);
+  const [search,setSearch] = useState()
   const handleClose = () => {
     setOpen(false);
   };
   useEffect(() => {
-    dispatch(getCountriesThunk(page, limit));
-  }, [page, limit]);
+    dispatch(getCountriesThunk(page, limit,search));
+  }, [page, limit,search]);
 
   useEffect(() => {
     if (count) {
@@ -88,6 +89,10 @@ const Users = () => {
       <h2 mt={3} mb={3}>
         Users Settings
       </h2>
+      <Box style={{margin:"15px"}}>
+        <h4>Search</h4>
+        <TextField placeholder="Search" value={search} onChange={e=>setSearch(e.target.value)}/>
+      </Box>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>

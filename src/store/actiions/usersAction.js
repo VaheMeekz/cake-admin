@@ -2,7 +2,7 @@ import axios from "axios";
 import { baseUrl, token } from "../../api/userApi";
 import { GET_USERS } from "../types";
 
-export const getCountriesThunk = (offset, limit) => {
+export const getCountriesThunk = (offset, limit,search) => {
   return async (dispatch) => {
     const response = await axios.get(`${baseUrl}/users`, {
       headers: {
@@ -11,6 +11,7 @@ export const getCountriesThunk = (offset, limit) => {
       params: {
         offset,
         limit,
+        search
       },
     });
     dispatch({

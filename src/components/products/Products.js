@@ -30,6 +30,8 @@ import AddIcon from "@mui/icons-material/Add";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import "../aboutUs/aboutUs.scss";
+import ProductEditImage from "../productEditImage/productEditImage";
+import ProductAddImage from "../productEditImage/productAddImage";
 
 const style = {
     position: "absolute",
@@ -97,6 +99,7 @@ const Products = () => {
     const [cake_count, setCakeCount] = useState();
     const [cake_price, setCakePrice] = useState();
     const [cuurentEditImage, setCuurentEditImage] = useState(null)
+    console.log(cuurentEditImage,"<<<");
 
     //value
     const [nameHy, setNameHy] = useState();
@@ -121,6 +124,7 @@ const Products = () => {
     const [cake_addition_name_enNew, setCakeAditionNameEnNew] = useState();
     const [cake_addition_priceNew, setCakeAditionPriceNew] = useState();
     const [editImage, setEditImage] = useState(null)
+    const [search, setSearch] = useState()
     //end
     const [nameNewHy, setNameNewHy] = useState("");
     const [nameNewRu, setNameNewRu] = useState("");
@@ -332,7 +336,8 @@ const Products = () => {
     };
     //file upload end
 
-    const handleFileEdit = (e) => {
+    const handleFileEdit = (e, index) => {
+
         // setCuurentEditImage(index)
         let files = [];
         Object.keys(e.target.files).map((f) => {
@@ -375,8 +380,8 @@ const Products = () => {
     };
 
     useEffect(() => {
-        dispatch(getProductsThunk(page, limit));
-    }, [page, limit]);
+        dispatch(getProductsThunk(page, limit, search));
+    }, [page, limit, search]);
 
     useEffect(() => {
         dispatch(getCategoryThunk());
@@ -393,7 +398,6 @@ const Products = () => {
     }, [products]);
 
     const transport = (row) => {
-        console.log(row);
         setCurrentId(row.id);
         setOpenEdit(true);
         setNameHy(row.nameHy);
@@ -457,6 +461,9 @@ const Products = () => {
                 price,
                 image,
                 category_id: category,
+                longDescriptionHy: londDescHy,
+                longDescriptionRu: londDescRu,
+                longDescriptionEn: londDescEn,
             }, {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -465,7 +472,7 @@ const Products = () => {
             .then(function (response) {
                 if (!response.data.error) {
                     Swal.fire({
-                        position: "center", icon: "success", title: "Deleted", showConfirmButton: false, timer: 1500,
+                        position: "center", icon: "success", title: "Succsess!", showConfirmButton: false, timer: 1500,
                     });
                     setOpenEdit(false);
                     setTimeout(() => {
@@ -502,6 +509,7 @@ const Products = () => {
                 adition_info_hy,
                 adition_info_ru,
                 adition_info_en,
+                addition_info_value: cake_addition_priceNew
             }, {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -559,6 +567,12 @@ const Products = () => {
         <h2 mt={3} mb={3}>
             Products
         </h2>
+        <hr/>
+        <Box style={{margin: "10px"}}>
+            <h4>Search</h4>
+            <TextField placeholder="Search" value={search} onChange={e => setSearch(e.target.value)}/>
+        </Box>
+        <hr/>
         <Box m={2}>
             <Button variant="contained" onClick={() => setOpenAdd(true)}>
                 <AddIcon/>
@@ -574,7 +588,7 @@ const Products = () => {
                             <TableCell align="left">Name Hy</TableCell>
                             <TableCell align="left">Name Ru</TableCell>
                             <TableCell align="left">Name En</TableCell>
-                            <TableCell align="left">Category</TableCell>
+                            {/*<TableCell align="left">Category</TableCell>*/}
                             <TableCell align="left">Description Hy</TableCell>
                             <TableCell align="left">Description Ru</TableCell>
                             <TableCell align="left">Description En</TableCell>
@@ -603,7 +617,7 @@ const Products = () => {
                             <TableCell align="left">{row.nameHy}</TableCell>
                             <TableCell align="left">{row.nameRu}</TableCell>
                             <TableCell align="left">{row.nameEn}</TableCell>
-                            <TableCell align="left">{row.Category?.nameHy}</TableCell>
+                            {/*<TableCell align="left">{row.Category?.nameHy}</TableCell>*/}
                             <TableCell align="left">{row.descriptionHy}</TableCell>
                             <TableCell align="left">{row.descriptionRu}</TableCell>
                             <TableCell align="left">{row.descriptionEn}</TableCell>
@@ -628,35 +642,37 @@ const Products = () => {
                 </Table>
             </TableContainer>
         </Box>
-        <Box>
-            <div className="pagBox">
-                <div>
-                    {pages.length - 1 == page ? (<ArrowBackIcon
-                        onClick={() => {
-                            setPage(page - 1);
-                        }}
-                    />) : null}
-                </div>
-                {pages.length > 1 && pages.map((s) => {
-                    return (<div
-                        className={page === s ? "ActivePagItem" : "pagItem"}
-                        key={s}
-                        onClick={() => {
-                            setPage(s);
-                        }}
-                    >
-                        {s + 1}
-                    </div>);
-                })}
-                <div>
-                    {pages.length - 1 == page ? null : (<ArrowForwardIcon
-                        onClick={() => {
-                            setPage(page + 1);
-                        }}
-                    />)}
-                </div>
-            </div>
 
+        <Box>
+            {search && search.length ? null : (
+                <div className="pagBox">
+                    <div>
+                        {pages.length - 1 == page ? (<ArrowBackIcon
+                            onClick={() => {
+                                setPage(page - 1);
+                            }}
+                        />) : null}
+                    </div>
+                    {pages.length > 1 && pages.map((s) => {
+                        return (<div
+                            className={page === s ? "ActivePagItem" : "pagItem"}
+                            key={s}
+                            onClick={() => {
+                                setPage(s);
+                            }}
+                        >
+                            {s + 1}
+                        </div>);
+                    })}
+                    <div>
+                        {pages.length - 1 == page ? null : (<ArrowForwardIcon
+                            onClick={() => {
+                                setPage(page + 1);
+                            }}
+                        />)}
+                    </div>
+                </div>
+            )}
             {/* edit */}
             <Modal
                 open={openEdit}
@@ -710,33 +726,32 @@ const Products = () => {
                                 onChange={(e) => setLongDescHy(e.target.value)}
                             />
                             <h4>Addition Info</h4>
-                            <textarea
-                                id="w3review"
-                                name="textHy"
-                                rows="4"
-                                cols="50"
-                                className="textareaText"
-                                value={adition_info_hyNew}
-                                onChange={(e) => setAditionInfoHyNew(e.target.value)}
-                            />
-                            {cake_addition_name_hyNew !== "" && <h4>Addition</h4>}
+                            {/*<textarea*/}
+                            {/*    id="w3review"*/}
+                            {/*    name="textHy"*/}
+                            {/*    rows="4"*/}
+                            {/*    cols="50"*/}
+                            {/*    className="textareaText"*/}
+                            {/*    value={adition_info_hyNew}*/}
+                            {/*    onChange={(e) => setAditionInfoHyNew(e.target.value)}*/}
+                            {/*/>*/}
+                            {/*{cake_addition_name_hyNew !== "" && <h4>Addition</h4>}*/}
 
-                            {cake_addition_name_hyNew && cake_addition_name_hyNew.split(",").map((i, index) => {
-                                return (<div style={{margin: "10px"}} key={index}>
-                                    <p>{i}</p>
-                                    <Button onClick={() => {
-                                        setAdditionEdit(true);
-                                        setCurrentAddition(index)
-                                    }}>Edit</Button>
-                                    {additionEddit && cake_addition_name_hyNew.split(",").filter((i, index) => index == cuurentAddition ?
-                                        <TextField variant="outlined"
-                                                   value={cake_addition_name_hyNew.split(",")[cuurentAddition]}
-                                                   onChange={(e) => {
-                                                       handleAddition(e, cuurentAddition)
-                                                   }}/> : null)}
-
-                                </div>)
-                            })}
+                            {/*{cake_addition_name_hyNew && cake_addition_name_hyNew.split(",").map((i, index) => {*/}
+                            {/*    return (<div style={{margin: "10px"}} key={index}>*/}
+                            {/*        <p>{i}</p>*/}
+                            {/*        <Button onClick={() => {*/}
+                            {/*            setAdditionEdit(true);*/}
+                            {/*            setCurrentAddition(index)*/}
+                            {/*        }}>Edit</Button>*/}
+                            {/*        {additionEddit && cake_addition_name_hyNew.split(",").filter((i, index) => index == cuurentAddition ?*/}
+                            {/*            <TextField variant="outlined"*/}
+                            {/*                       value={cake_addition_name_hyNew.split(",")[cuurentAddition]}*/}
+                            {/*                       onChange={(e) => {*/}
+                            {/*                           handleAddition(e, cuurentAddition)*/}
+                            {/*                       }}/> : null)}*/}
+                            {/*    </div>)*/}
+                            {/*})}*/}
                         </TabPanel>
                         <TabPanel value={value} index={1}>
                             <h4>Name</h4>
@@ -768,25 +783,25 @@ const Products = () => {
                                 onChange={(e) => setLongDescRu(e.target.value)}
                             />
                             <h4>Addition Info</h4>
-                            <textarea
-                                id="w3review"
-                                name="textHy"
-                                rows="4"
-                                cols="50"
-                                className="textareaText"
-                                value={adition_info_ruNew}
-                                onChange={(e) => setAditionInfoRuNew(e.target.value)}
-                            />
-                            {cake_addition_name_ruNew !== "" && <h4>Addition</h4>}
+                            {/*<textarea*/}
+                            {/*    id="w3review"*/}
+                            {/*    name="textHy"*/}
+                            {/*    rows="4"*/}
+                            {/*    cols="50"*/}
+                            {/*    className="textareaText"*/}
+                            {/*    value={adition_info_ruNew}*/}
+                            {/*    onChange={(e) => setAditionInfoRuNew(e.target.value)}*/}
+                            {/*/>*/}
+                            {/*{cake_addition_name_ruNew !== "" && <h4>Addition</h4>}*/}
 
-                            {cake_addition_name_ruNew && cake_addition_name_ruNew.split(",").map((i, index) => {
-                                return (<div style={{margin: "10px"}} key={index}>
-                                    <TextField variant="outlined" value={i} onChange={(e) => {
-                                        let newValue = e.target.value;
-                                        cake_addition_name_ruNew.split(",")[index] = newValue
-                                        setCakeAditionNameRuNew(cake_addition_name_ruNew)
-                                    }}/></div>)
-                            })}
+                            {/*{cake_addition_name_ruNew && cake_addition_name_ruNew.split(",").map((i, index) => {*/}
+                            {/*    return (<div style={{margin: "10px"}} key={index}>*/}
+                            {/*        <TextField variant="outlined" value={i} onChange={(e) => {*/}
+                            {/*            let newValue = e.target.value;*/}
+                            {/*            cake_addition_name_ruNew.split(",")[index] = newValue*/}
+                            {/*            setCakeAditionNameRuNew(cake_addition_name_ruNew)*/}
+                            {/*        }}/></div>)*/}
+                            {/*})}*/}
                         </TabPanel>
                         <TabPanel value={value} index={2}>
                             <h4>Name</h4>
@@ -817,26 +832,26 @@ const Products = () => {
                                 value={londDescEn}
                                 onChange={(e) => setLongDescEn(e.target.value)}
                             />
-                            <h4>Addition Info</h4>
-                            <textarea
-                                id="w3review"
-                                name="textHy"
-                                rows="4"
-                                cols="50"
-                                className="textareaText"
-                                value={adition_info_enNew}
-                                onChange={(e) => setAditionInfoEnNew(e.target.value)}
-                            />
-                            {cake_addition_name_enNew !== "" && <h4>Addition</h4>}
+                            {/*<h4>Addition Info</h4>*/}
+                            {/*<textarea*/}
+                            {/*    id="w3review"*/}
+                            {/*    name="textHy"*/}
+                            {/*    rows="4"*/}
+                            {/*    cols="50"*/}
+                            {/*    className="textareaText"*/}
+                            {/*    value={adition_info_enNew}*/}
+                            {/*    onChange={(e) => setAditionInfoEnNew(e.target.value)}*/}
+                            {/*/>*/}
+                            {/*{cake_addition_name_enNew !== "" && <h4>Addition</h4>}*/}
 
-                            {cake_addition_name_enNew && cake_addition_name_enNew.split(",").map((i, index) => {
-                                return (<div style={{margin: "10px"}} key={index}>
-                                    <TextField variant="outlined" value={i} onChange={(e) => {
-                                        let newValue = e.target.value;
-                                        cake_addition_name_enNew.split(",")[index] = newValue
-                                        setCakeAditionNameEnNew(cake_addition_name_enNew)
-                                    }}/></div>)
-                            })}
+                            {/*{cake_addition_name_enNew && cake_addition_name_enNew.split(",").map((i, index) => {*/}
+                            {/*    return (<div style={{margin: "10px"}} key={index}>*/}
+                            {/*        <TextField variant="outlined" value={i} onChange={(e) => {*/}
+                            {/*            let newValue = e.target.value;*/}
+                            {/*            cake_addition_name_enNew.split(",")[index] = newValue*/}
+                            {/*            setCakeAditionNameEnNew(cake_addition_name_enNew)*/}
+                            {/*        }}/></div>)*/}
+                            {/*})}*/}
                         </TabPanel>
                     </Box>
                     <Box ml={2}>
@@ -853,6 +868,14 @@ const Products = () => {
                             Submit
                         </Button>
                     </Box>
+                    <hr/>
+                    <Box>
+                        <h4>
+                            Add new Image
+                        </h4>
+                        <ProductAddImage setOpenEdit={setOpenEdit} currentId={currentId}/>
+                    </Box>
+                    <hr/>
                     <Box>
                         <div>
                             {editImage !== null &&
@@ -869,29 +892,28 @@ const Products = () => {
                         {image && image.split(",").map((i, index) => {
 
                             return (<div key={index}>
-                                <img src={i} alt={"image"} width={200} style={{margin: "20px"}}/>
-                                <Box>
+                                <ProductEditImage editImage={editImage ? true : false}
+                                                  image={i} index={index}
+                                                  handleEditImage={handleEditImage}
+                                                  cuurentEditImage={cuurentEditImage}
+                                                  currentId={currentId}
+                                                  setOpenEdit={setOpenEdit}
+                                />
 
+                                <Box>
                                     <div className="uploadBtns">
-                                        <Button component="label">
-                                            Upload
-                                            <input type="file" hidden multiple onChange={handleFileEdit}/>
+                                        <Button component="label" variant="contained">
+                                            Upload edited image
+                                            <input type="file" hidden multiple onChange={(e) => {
+                                                handleFileEdit(e)
+                                                setCuurentEditImage(index)
+                                            }}/>
                                         </Button>
                                     </div>
-                                    {
-                                        editImage !== null &&
-                                        <Button onClick={() => handleEditImage(index)}
-                                                variant="contained">Edit</Button>
-                                    }
                                 </Box>
                             </div>)
                         })}
                     </Box>
-                    {/*<Box m={2}>*/}
-                    {/*    <Button variant="contained" onClick={handleEdit}>*/}
-                    {/*        Submit*/}
-                    {/*    </Button>*/}
-                    {/*</Box>*/}
                 </Box>
             </Modal>
 
@@ -917,9 +939,7 @@ const Products = () => {
                     </DialogActions>
                 </Box>
             </Modal>
-
             {/* add */}
-
             <Modal
                 open={openAdd}
                 onClose={() => setOpenAdd(false)}

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {getTermsBannerThunk, getWishBannerThunk} from "../../store/actiions/bannersActions";
+import {getWishBannerThunk} from "../../store/actiions/bannersActions";
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
