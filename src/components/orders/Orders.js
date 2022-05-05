@@ -163,10 +163,12 @@ function Row(props) {
         </React.Fragment>
     );
 }
+
 const Orders = () => {
     const dispatch = useDispatch();
     const limit = 4;
     const data = useSelector((state) => state.orderReducer.orders);
+    console.log(data,"...........");
     const count = useSelector((state) => state.orderReducer.count);
     const [page, setPage] = useState(0);
     const [pages, setPages] = useState([]);

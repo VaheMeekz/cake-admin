@@ -99,7 +99,6 @@ const Products = () => {
     const [cake_count, setCakeCount] = useState();
     const [cake_price, setCakePrice] = useState();
     const [cuurentEditImage, setCuurentEditImage] = useState(null)
-    console.log(cuurentEditImage,"<<<");
 
     //value
     const [nameHy, setNameHy] = useState();
