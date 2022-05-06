@@ -182,7 +182,8 @@ const DetailFooter = () => {
             <Box>
                 <Box sx={{width: '100%'}}>
                     <Box sx={{borderBottom: 1, borderColor: 'divider'}}>
-                        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+                        <Tabs value={value} onChange={handleChange} textColor="secondary"
+                              indicatorColor="secondary" aria-label="basic tabs example">
                             <Tab label="Hy" {...a11yProps(0)} />
                             <Tab label="Ru" {...a11yProps(1)} />
                             <Tab label="En" {...a11yProps(2)} />
@@ -237,11 +238,11 @@ const DetailFooter = () => {
                                   onChange={e => setSubtitleEn(e.target.value)}
                         />
                     </TabPanel>
-                    <Button style={{margin: "20px"}} variant="contained"
+                    <Button  color="secondary" color="secondary" style={{margin: "20px"}} variant="contained"
                             onClick={handleChangeFooterTexts}>Submit</Button>
                     <Box m={2}>
                         <img src={image} width={300}/>
-                        <Button style={{margin: "-15px 0 20px 20px"}} onClick={() => setOPen(true)}
+                        <Button color="secondary" style={{margin: "-15px 0 20px 20px"}} onClick={() => setOPen(true)}
                                 variant="contained">Edit</Button>
                     </Box>
                 </Box>
@@ -260,13 +261,13 @@ const DetailFooter = () => {
                         <div className="imageArea">
                             <div>
                                 <div className="uploadBtns">
-                                    <Button variant="contained" component="label">
+                                    <Button color="secondary" variant="contained" component="label">
                                         Upload
                                         <input type="file" hidden multiple onChange={handleFile}/>
                                     </Button>
                                 </div>
                                 <div className="uploadBtns" m={2}>
-                                    {thisImg == null ? null : <Button variant="contained" onClick={handleSubmit}>
+                                    {thisImg == null ? null : <Button color="secondary" variant="contained" onClick={handleSubmit}>
                                         Submit
                                     </Button>}
 
@@ -280,7 +281,7 @@ const DetailFooter = () => {
                         </div>
                     </Box>
                     <DialogActions>
-                        <Button variant="contained" onClick={() => setOPen(false)}>Close</Button>
+                        <Button  color="secondary" variant="contained" onClick={() => setOPen(false)}>Close</Button>
                         {/*<Button variant="contained" onClick={handleDelete}>Yes</Button>*/}
                     </DialogActions>
                 </Box>

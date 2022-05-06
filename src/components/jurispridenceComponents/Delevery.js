@@ -151,12 +151,12 @@ const Delevery = ({data}) => {
             });
     }
     return (
-        <Box>
+        <Box className="boxHeigth">
             <Box m={2}>
                 <h3>Delevery</h3>
             </Box>
             <Box m={2}>
-                <Button variant="contained" onClick={() => setOpenAdd(true)}>Add</Button>
+                <Button color="secondary" variant="contained" onClick={() => setOpenAdd(true)}>Add</Button>
             </Box>
             <TableContainer component={Paper}>
                 <Table sx={{minWidth: 650}} aria-label="simple table">
@@ -185,10 +185,12 @@ const Delevery = ({data}) => {
                                 <TableCell align="left">{row.answerHy}</TableCell>
                                 <TableCell align="left">{row.answerRu}</TableCell>
                                 <TableCell align="left">{row.answerEn}</TableCell>
-                                <TableCell align="left"><DeleteIcon onClick={() => {
-                                    setCurrentId(row.id);
-                                    setOpen(true)
-                                }}/></TableCell>
+                                <TableCell align="left">
+                                    <Button color="secondary" variant="outlined" onClick={() => {
+                                        setCurrentId(row.id);
+                                        setOpen(true)
+                                    }}> <DeleteIcon /></Button>
+                                   </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
@@ -206,8 +208,8 @@ const Delevery = ({data}) => {
                         Delete
                     </Typography>
                     <DialogActions>
-                        <Button onClick={handleClose}>No</Button>
-                        <Button onClick={handeleDelete} autoFocus>
+                        <Button color="secondary" onClick={handleClose}>No</Button>
+                        <Button color="secondary" onClick={handeleDelete} autoFocus>
                             Yes
                         </Button>
                     </DialogActions>
@@ -226,7 +228,8 @@ const Delevery = ({data}) => {
                     </Typography>
                     <Box sx={{ width: '100%' }}>
                         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                            <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+                            <Tabs value={value} onChange={handleChange} textColor="secondary"
+                                  indicatorColor="secondary" aria-label="basic tabs example">
                                 <Tab label="Hy" {...a11yProps(0)} />
                                 <Tab label="Ru" {...a11yProps(1)} />
                                 <Tab label="En" {...a11yProps(2)} />
@@ -285,8 +288,8 @@ const Delevery = ({data}) => {
                         </TabPanel>
                     </Box>
                     <DialogActions>
-                        <Button onClick={handleCloseAdd}>Cancle</Button>
-                        <Button onClick={handleAdd} autoFocus>
+                        <Button color="secondary" onClick={handleCloseAdd}>Cancle</Button>
+                        <Button color="secondary" onClick={handleAdd} autoFocus>
                             Add
                         </Button>
                     </DialogActions>

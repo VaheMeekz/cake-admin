@@ -26,25 +26,32 @@ import Delevery from "../../components/delevery/Delevery";
 import Footer from "../../components/footer/Fotter";
 import Choose from "../../components/choose/Choose";
 import Jurisrudece from "../../components/jurisrudece/Jurisrudece";
-
+import GroupIcon from '@mui/icons-material/Group';
+import CategoryIcon from '@mui/icons-material/Category';
+import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
+import ElectricCarIcon from '@mui/icons-material/ElectricCar';
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import InfoIcon from '@mui/icons-material/Info';
+import BuildIcon from '@mui/icons-material/Build';
+import LockOpenIcon from '@mui/icons-material/LockOpen';
 export const isAuthPages = [
-    {id: 1, path: USERS_PAGE, name: "Users", Component: Users},
-    {id: 2, path: PRODUCT_PAGE, name: "Products", Component: Products},
-    {id: 9, path: ORDERS_PAGE, name: "Orders", Component: Orders},
-    {id: 8, path: CATEGORY_PAGE, name: "Category", Component: Category},
-    {id: 10, path: DELEVERY_PAGE, name: "Delivery", Component: Delevery},
-    {id: 11, path: FOOTER_PAGE, name: "Footers", Component: Footer},
-    {id: 3, path: ABOUTUS_PAGE, name: "About Us", Component: AboutUs},
-    {id: 12, path: CHOOSE_PAGE, name: "Choose", Component: Choose},
-    {id: 3, path: JURISPRUDECE_PAGE, name: "Jurisrudece", Component: Jurisrudece},
-    {id: 4, path: CONTACTS_PAGE, name: "Contact Us", Component: ContactUs},
-    {id: 5, path: SUBSCRIBERS_PAGE, name: "Subscribers", Component: Subscribers},
-    {id: 6, path: BANNERS_PAGE, name: "Banners", Component: Banners},
-    {id: 7, path: INFO_PAGE, name: "Info", Component: Info},
+    {id: 1, path: USERS_PAGE, name: "Users", Component: Users,icon:<GroupIcon/>},
+    {id: 2, path: PRODUCT_PAGE, name: "Products", Component: Products,icon:<DashboardIcon/>},
+    {id: 9, path: ORDERS_PAGE, name: "Orders", Component: Orders,icon:<ProductionQuantityLimitsIcon/>},
+    {id: 8, path: CATEGORY_PAGE, name: "Category", Component: Category,icon:<CategoryIcon/>},
+    {id: 10, path: DELEVERY_PAGE, name: "Delivery", Component: Delevery,icon:<ElectricCarIcon/>},
+    {id: 11, path: FOOTER_PAGE, name: "Footers", Component: Footer,icon:<BuildIcon/>},
+    {id: 3, path: ABOUTUS_PAGE, name: "About Us", Component: AboutUs,icon:<InfoIcon/>},
+    {id: 12, path: CHOOSE_PAGE, name: "Choose", Component: Choose,icon:<BuildIcon/>},
+    {id: 3, path: JURISPRUDECE_PAGE, name: "Jurisrudece", Component: Jurisrudece,icon:<DashboardIcon/>},
+    {id: 4, path: CONTACTS_PAGE, name: "Contact Us", Component: ContactUs,icon:<InfoIcon/>},
+    {id: 5, path: SUBSCRIBERS_PAGE, name: "Subscribers", Component: Subscribers,icon:<GroupIcon/>},
+    {id: 6, path: BANNERS_PAGE, name: "Banners", Component: Banners,icon:<BuildIcon/>},
+    {id: 7, path: INFO_PAGE, name: "Info", Component: Info,icon:<InfoIcon/>},
 ];
 
 export const isntAuthPages = [
-    {id: 1, path: LOGIN_PAGE, name: "Login", Component: Login},
+    {id: 1, path: LOGIN_PAGE, name: "Login", Component: Login,icon:<LockOpenIcon/>},
 ];
 
 export const notFoundPages = [

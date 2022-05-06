@@ -14,7 +14,7 @@ const Jurisrudece = () => {
         dispatch(getDeleveryDataThunk())
     }, [])
     return (
-        <Box m={2}>
+        <Box m={2} className="boxHeigth">
             <h2 mt={3} mb={3}>Jurisrudece</h2>
             <Box m={2}>
                 <Terms data={terms}/>

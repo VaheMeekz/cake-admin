@@ -7,13 +7,14 @@ import "./home.scss";
 import {token} from "../../api/userApi";
 import {thchangeAuAC} from "../../store/actiions/authAction";
 import {useDispatch} from "react-redux";
+import Footer from "../footer/Footer";
 
 const Home = () => {
     const dispatch = useDispatch()
     useEffect(()=>{
         token !== null && dispatch(thchangeAuAC(true));
     },[])
-  const [close, setClose] = useState(false);
+  const [close, setClose] = useState(true);
   return (
     <div className="home">
       {close ? <Sidebar /> : null}
@@ -22,6 +23,7 @@ const Home = () => {
         <Box>
           <Pages />
         </Box>
+          <Footer/>
       </div>
     </div>
   );

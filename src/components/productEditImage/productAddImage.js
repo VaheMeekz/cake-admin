@@ -68,13 +68,13 @@ const ProductAddImage = ({setOpenEdit,currentId}) => {
             <div className="imageArea">
                 <div>
                     <div className="uploadBtns">
-                        <Button variant="contained" component="label">
-                            Upload
+                        <Button  color="secondary"  variant="contained" component="label">
+                            Upload New Image
                             <input type="file" hidden multiple onChange={handleFile}/>
                         </Button>
                     </div>
                     <div className="uploadBtns" m={2}>
-                        {thisImg == null ? null : <Button variant="contained" onClick={handleSubmit}>
+                        {thisImg == null ? null : <Button  color="secondary"  variant="contained" onClick={handleSubmit}>
                             Submit
                         </Button>}
 

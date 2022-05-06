@@ -85,7 +85,7 @@ const Users = () => {
 
 
   return (
-    <Box m={3}>
+    <Box m={3} className="boxHeigth">
       <h2 mt={3} mb={3}>
         Users Settings
       </h2>
@@ -126,12 +126,12 @@ const Users = () => {
                   </TableCell>
                   <TableCell align="left">{row.email}</TableCell>
                   <TableCell align="left" className="delBtn">
-                    <DeleteIcon
-                      onClick={() => {
-                        setCurrentId(row.id);
-                        setOpen(true);
-                      }}
-                    />
+                    <Button variant="outlined" onClick={() => {
+                      setCurrentId(row.id);
+                      setOpen(true);
+                    }} color="secondary" autoFocus>
+                      <DeleteIcon className="iconsPreferances"/>
+                    </Button>
                   </TableCell>
                 </TableRow>
               ))}
@@ -140,7 +140,7 @@ const Users = () => {
       </TableContainer>
       <Box m={3}>
         <div className="pagBox">
-          <div>
+          <div className="arrowBack">
             {pages.length - 1 == page ? (
               <ArrowBackIcon
                 onClick={() => {
@@ -157,13 +157,15 @@ const Users = () => {
                     className={page === s ? "ActivePagItem" : "pagItem"}
                   onClick={() => {
                     setPage(s);
-                  }}
+                  }}style={{
+                  cursor:"pointer"
+                }}
                 >
                   {s + 1}
                 </div>
               );
             })}
-          <div>
+          <div className="arrowBack">
             {pages.length - 1 == page ? null : (
               <ArrowForwardIcon
                 onClick={() => {
@@ -181,8 +183,8 @@ const Users = () => {
         >
           <DialogTitle id="alert-dialog-title">{"Delate?"}</DialogTitle>
           <DialogActions>
-            <Button onClick={handleClose}>No</Button>
-            <Button onClick={handleDeleteUser} autoFocus>
+            <Button onClick={handleClose} color="error" variant="outlined">No</Button>
+            <Button onClick={handleDeleteUser} color="secondary" variant="contained" autoFocus>
               Yes
             </Button>
           </DialogActions>

@@ -22,7 +22,7 @@ const Login = () => {
   });
 
   return (
-    <div className="box">
+    <div className="box" className="boxHeigth">
       <div className="loginBox">
         <h2>Login</h2>
         <Formik

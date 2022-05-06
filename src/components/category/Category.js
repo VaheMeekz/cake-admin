@@ -152,12 +152,12 @@ const Category = () => {
             });
     };
     return (
-        <Box m={3}>
+        <Box m={3} className="boxHeigth">
             <h2 mt={3} mb={3}>
                 Category Settings
             </h2>
             <Box m={2}>
-                <Button variant="contained" onClick={() => setOpenAdd(true)}>
+                <Button color="secondary" variant="contained" onClick={() => setOpenAdd(true)}>
                     Add
                 </Button>
             </Box>
@@ -184,7 +184,7 @@ const Category = () => {
                                     <div className="btnsBox">
                                         <div m={2}>
                                             {" "}
-                                            <Button
+                                            <Button color="secondary"
                                                 variant="contained"
                                                 onClick={() => {
                                                     setCurrentId(i.id);
@@ -199,7 +199,7 @@ const Category = () => {
                                         </div>
                                         <div m={2}>
                                             {" "}
-                                            <Button
+                                            <Button color="secondary"
                                                 variant="contained"
                                                 onClick={() => {
                                                     setOpenDelete(true);
@@ -250,7 +250,7 @@ const Category = () => {
                             />
                         </Typography>
                         <Typography id="modal-modal-description" sx={{mt: 2}}>
-                            <Button variant="contained" onClick={handleEdit}>Submit</Button>
+                            <Button  color="secondary" variant="contained" onClick={handleEdit}>Submit</Button>
                         </Typography>
                     </Box>
                 </Modal>
@@ -271,13 +271,13 @@ const Category = () => {
                             sx={{mt: 2}}
                         >
                             <div>
-                                <Button variant="contained" onClick={handleCloseDelete}>
+                                <Button  color="secondary" variant="contained" onClick={handleCloseDelete}>
                                     No
                                 </Button>
                             </div>
                             <div>
                                 {" "}
-                                <Button variant="contained" onClick={handelDelete}>
+                                <Button color="secondary" variant="contained" onClick={handelDelete}>
                                     Yes
                                 </Button>
                             </div>
@@ -324,8 +324,8 @@ const Category = () => {
                             id="modal-modal-description"
                             sx={{mt: 2}}
                         >
-                            <Button onClick={handleCloseAdd}>Close</Button>
-                            <Button variant="contained" onClick={handleAdd}>
+                            <Button color="secondary" onClick={handleCloseAdd}>Close</Button>
+                            <Button  color="secondary" variant="contained" onClick={handleAdd}>
                                 Submit
                             </Button>
                         </Typography>

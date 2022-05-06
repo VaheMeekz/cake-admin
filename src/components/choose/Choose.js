@@ -286,10 +286,10 @@ const Choose = () => {
     }
 
     return (
-        <Box m={2}>
+        <Box m={2} className="boxHeigth">
             <h2 mt={3} mb={3}>Why choose us Settings</h2>
             <Box m={2}>
-                <Button variant="contained" onClick={handleOpen}>Add</Button>
+                <Button  color="secondary" variant="contained" onClick={handleOpen}>Add</Button>
             </Box>
             <Box m={2}>
                 <TableContainer component={Paper}>
@@ -320,13 +320,19 @@ const Choose = () => {
                                     <TableCell align="left">{row.textHy}</TableCell>
                                     <TableCell align="left">{row.textRu}</TableCell>
                                     <TableCell align="left">{row.textEn}</TableCell>
-                                    <TableCell align="left"><DeleteIcon onClick={() => {
-                                        setCurrentId(row.id)
-                                        setOpenDelete(true)
-                                    }}/></TableCell>
-                                    <TableCell align="left"><EditIcon onClick={() => {
-                                        transport(row.titleHy, row.titleRu, row.titleEn, row.textHy, row.textRu, row.textEn, row.id)
-                                    }}/></TableCell>
+                                    <TableCell align="left">
+                                        <Button variant="outlined" color="secondary" onClick={() => {
+                                            setCurrentId(row.id)
+                                            setOpenDelete(true)
+                                        }}>
+                                            <DeleteIcon />
+                                        </Button>
+                                        </TableCell>
+                                    <TableCell align="left">
+                                        <Button variant="outlined" color="secondary" onClick={() => {
+                                            transport(row.titleHy, row.titleRu, row.titleEn, row.textHy, row.textRu, row.textEn, row.id)
+                                        }}> <EditIcon /></Button>
+                                       </TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
@@ -334,7 +340,7 @@ const Choose = () => {
                 </TableContainer>
                 <Box m={3}>
                     <img src={image} alt={"image"} width={500}/>
-                    <Button style={{margin: "-10px 20px 0 20px"}} variant="contained"
+                    <Button  color="secondary" style={{margin: "-10px 20px 0 20px"}} variant="contained"
                             onClick={() => setOpenImage(true)}>Edit image</Button>
                 </Box>
                 {/*add*/}
@@ -350,7 +356,8 @@ const Choose = () => {
                         </Typography>
                         <Box sx={{width: '100%'}}>
                             <Box sx={{borderBottom: 1, borderColor: 'divider'}}>
-                                <Tabs value={addValue} onChange={handleChangeAdd} aria-label="basic tabs example">
+                                <Tabs value={addValue} onChange={handleChangeAdd} textColor="secondary"
+                                      indicatorColor="secondary" aria-label="basic tabs example">
                                     <Tab label="Hy" {...a11yProps(0)} />
                                     <Tab label="Ru" {...a11yProps(1)} />
                                     <Tab label="En" {...a11yProps(2)} />
@@ -410,8 +417,8 @@ const Choose = () => {
 
                         </Box>
                         <DialogActions>
-                            <Button onClick={() => setOpen(false)}>No</Button>
-                            <Button onClick={hendleAdd} autoFocus>
+                            <Button color="secondary" onClick={() => setOpen(false)}>No</Button>
+                            <Button color="secondary" color="secondary"  onClick={hendleAdd} autoFocus>
                                 Add
                             </Button>
                         </DialogActions>
@@ -429,8 +436,8 @@ const Choose = () => {
                             Delete
                         </Typography>
                         <DialogActions>
-                            <Button onClick={() => setOpenDelete(false)}>No</Button>
-                            <Button onClick={handleDelete} autoFocus>
+                            <Button color="secondary" color="secondary" onClick={() => setOpenDelete(false)}>No</Button>
+                            <Button color="secondary" variant="outlined"  onClick={handleDelete} autoFocus>
                                 Yes
                             </Button>
                         </DialogActions>
@@ -449,7 +456,8 @@ const Choose = () => {
                         </Typography>
                         <Box sx={{width: '100%'}}>
                             <Box sx={{borderBottom: 1, borderColor: 'divider'}}>
-                                <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+                                <Tabs value={value} onChange={handleChange} textColor="secondary"
+                                      indicatorColor="secondary" aria-label="basic tabs example">
                                     <Tab label="Hy" {...a11yProps(0)} />
                                     <Tab label="Ru" {...a11yProps(1)} />
                                     <Tab label="En" {...a11yProps(2)} />
@@ -508,8 +516,8 @@ const Choose = () => {
                             </TabPanel>
                         </Box>
                         <DialogActions>
-                            <Button onClick={() => setOpenEdit(false)}>Cancle</Button>
-                            <Button onClick={handleEdit} variant="contained" autoFocus>
+                            <Button color="secondary" color="secondary" onClick={() => setOpenEdit(false)}>Cancle</Button>
+                            <Button color="secondary" onClick={handleEdit} variant="contained" autoFocus>
                                 Yes
                             </Button>
                         </DialogActions>

@@ -14,7 +14,7 @@ const NotFound = () => {
             justifyContent:"center",
             alignItems:"center",
             flexDirection:"column"
-        }}>
+        }} className="boxHeigth">
             <h1 style={{
                 fontSize:"60px",
                 color:"#644bff",

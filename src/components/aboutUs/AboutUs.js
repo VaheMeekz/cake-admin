@@ -230,7 +230,7 @@ const AboutUs = () => {
     useEffect(()=>console.clear(),[data,titleEn,titleRu,titleHy])
 
     return (
-        <Box m={3}>
+        <Box m={3} className="boxHeigth">
             <h2 mt={3} mb={3}>
                 About Us Settings
             </h2>
@@ -240,6 +240,8 @@ const AboutUs = () => {
                         value={value}
                         onChange={handleChange}
                         aria-label="basic tabs example"
+                        textColor="secondary"
+                        indicatorColor="secondary"
                     >
                         <Tab label="Arm" {...a11yProps(0)} />
                         <Tab label="Ru" {...a11yProps(1)} />
@@ -259,6 +261,21 @@ const AboutUs = () => {
                         label="Am"
                         variant="standard"
                     />
+                    <h3 mt={3} mb={3}>
+                        Subtitle
+                    </h3>
+
+                    <textarea
+                        id="w3review"
+                        name="textHy"
+                        rows="8"
+                        value={subTitleHy}
+                        onChange={(e) => setSubTitleHy(e.target.value)}
+                        maxLength="600"
+                        cols="60"
+                        defaultValue={aboutUsData.length == 0 ? null : aboutUsData.textHy}
+                        className="textareaText"
+                    />
                 </TabPanel>
 
                 <TabPanel value={value} index={1}>
@@ -274,6 +291,20 @@ const AboutUs = () => {
                         label="Ru"
                         variant="standard"
                     />
+                    <h3 mt={3} mb={3}>
+                        Subtitle
+                    </h3>
+                    <textarea
+                        id="w3review"
+                        name="textRu"
+                        rows="8"
+                        value={subTitleRu}
+                        onChange={(e) => setSubTitleRu(e.target.value)}
+                        maxLength="600"
+                        defaultValue={aboutUsData.length == 0 ? null : aboutUsData.textRu}
+                        cols="60"
+                        className="textareaText"
+                    />
                 </TabPanel>
                 <TabPanel value={value} index={2}>
                     <h3 mt={3} mb={3}>
@@ -288,56 +319,10 @@ const AboutUs = () => {
                         label="En"
                         variant="standard"
                     />
-                </TabPanel>
-            </Box>
-            <Box sx={{width: "100%"}}>
-                <Box sx={{borderBottom: 1, borderColor: "divider"}}>
-                    <Tabs
-                        value={subTitleValue}
-                        onChange={handleChangeSubTitleTabs}
-                        aria-label="basic tabs example"
-                    >
-                        <Tab label="Arm" {...a11yProps(0)} />
-                        <Tab label="Ru" {...a11yProps(1)} />
-                        <Tab label="En" {...a11yProps(2)} />
-                    </Tabs>
-                </Box>
-                <TabPanel value={subTitleValue} index={0}>
-                    <h3 mt={3} mb={3}>
-                        subTitle
-                    </h3>
-                    <textarea
-                        id="w3review"
-                        name="textHy"
-                        rows="8"
-                        value={subTitleHy}
-                        onChange={(e) => setSubTitleHy(e.target.value)}
-                        maxLength="600"
-                        cols="60"
-                        defaultValue={aboutUsData.length == 0 ? null : aboutUsData.textHy}
-                        className="textareaText"
-                    />
-                </TabPanel>
-
-                <TabPanel value={subTitleValue} index={1}>
-                    <h3 mt={3} mb={3}>
-                        subTitle
-                    </h3>
-                    <textarea
-                        id="w3review"
-                        name="textRu"
-                        rows="8"
-                        value={subTitleRu}
-                        onChange={(e) => setSubTitleRu(e.target.value)}
-                        maxLength="600"
-                        defaultValue={aboutUsData.length == 0 ? null : aboutUsData.textRu}
-                        cols="60"
-                        className="textareaText"
-                    />
-                </TabPanel>
-                <TabPanel value={subTitleValue} index={2}>
-                    <h3 mt={3} mb={3}>
-                        subTitle
+                    <h3 mt={3} mb={3} style={{
+                        margin:"10px 0 10px 0"
+                    }}>
+                        Subtitle
                     </h3>
                     <textarea
                         id="w3review"
@@ -352,7 +337,7 @@ const AboutUs = () => {
                     />
                 </TabPanel>
             </Box>
-            <Button variant="contained" onClick={handleSubmit}>
+            <Button color="secondary" variant="contained" onClick={handleSubmit}>
                 Submit
             </Button>
             <Box m={2}>
@@ -361,7 +346,7 @@ const AboutUs = () => {
                         return (
                             <div key={index}>
                                 <img src={i} alt={"image"} key={index} width={300} height={200}/>
-                                <Button style={{margin:"-25px 20px 0 20px"}} variant="contained"
+                                <Button color="secondary" style={{margin:"-25px 20px 0 20px"}} variant="contained"
                                         onClick={()=> {
                                             setCurrentId(index)
                                             setOpen(true)
@@ -400,6 +385,8 @@ const AboutUs = () => {
                             value={infoOpen}
                             onChange={handleOpenInfoTabs}
                             aria-label="basic tabs example"
+                            textColor="secondary"
+                            indicatorColor="secondary"
                         >
                             <Tab label="Item One" {...a11yProps(0)} />
                             <Tab label="Item Two" {...a11yProps(1)} />
@@ -476,7 +463,7 @@ const AboutUs = () => {
                         />
                     </TabPanel>
                 </Box>
-                <Button variant="contained" onClick={handleAddInfo}>
+                <Button color="secondary" variant="contained" onClick={handleAddInfo}>
                     Submit
                 </Button>
                 <Modal
@@ -492,13 +479,13 @@ const AboutUs = () => {
                         <div className="imageArea">
                             <div>
                                 <div className="uploadBtns">
-                                    <Button variant="contained" component="label">
-                                        Upload
+                                    <Button color="secondary" variant="contained" component="label">
+                                        Upload Image
                                         <input type="file" hidden multiple onChange={handleFile}/>
                                     </Button>
                                 </div>
                                 <div className="uploadBtns" m={2}>
-                                    <Button variant="contained" onClick={handleEditImage}>
+                                    <Button  color="secondary" variant="contained" onClick={handleEditImage}>
                                         Submit
                                     </Button>
                                 </div>

@@ -30,12 +30,10 @@ const Subscribers = () => {
   const count = useSelector((state) => state?.subscribersReducer.count);
   const [page, setPage] = useState(0);
   const [pages, setPages] = useState([]);
-  const [limit, setLimit] = useState(4);
+  const limit=4;
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
-  const [currentId, setCurrentId] = useState(null);
   const [open, setOpen] = React.useState(false);
-  const [openDelete, setOpenDelete] = useState(false);
   useEffect(() => {
     dispatch(getSubscribersThunk(page, limit));
   }, [page, limit]);
@@ -90,7 +88,7 @@ const Subscribers = () => {
   };
 
   return (
-    <Box m={3}>
+    <Box m={3} className="boxHeigth">
       <h2 mt={3} mb={3}>
         Subscribers
       </h2>
@@ -98,6 +96,7 @@ const Subscribers = () => {
         <Button
           mt={3}
           variant="contained"
+          color="secondary"
           onClick={() => {
             setOpen(true);
           }}
@@ -111,9 +110,6 @@ const Subscribers = () => {
             <TableRow>
               <TableCell>
                 <strong>#</strong>
-              </TableCell>
-              <TableCell align="left">
-                <strong>name</strong>
               </TableCell>
               <TableCell align="left">
                 <strong>email</strong>
@@ -130,9 +126,6 @@ const Subscribers = () => {
                   <TableCell component="th" scope="row">
                     {index + 1}
                   </TableCell>
-                  <TableCell component="th" scope="row">
-                    {row.name}
-                  </TableCell>
                   <TableCell align="left">{row.email}</TableCell>
                 </TableRow>
               ))}
@@ -141,7 +134,7 @@ const Subscribers = () => {
       </TableContainer>
       <Box m={3}>
         <div className="pagBox">
-          <div>
+          <div className="arrowBack">
             {pages.length - 1 == page ? (
               <ArrowBackIcon
                 onClick={() => {
@@ -158,13 +151,15 @@ const Subscribers = () => {
                   key={s}
                   onClick={() => {
                     setPage(s);
-                  }}
+                  }}style={{
+                  cursor:"pointer"
+                }}
                 >
                   {s + 1}
                 </div>
               );
             })}
-          <div>
+          <div className="arrowBack">
             {pages.length - 1 == page ? null : (
               <ArrowForwardIcon
                 onClick={() => {

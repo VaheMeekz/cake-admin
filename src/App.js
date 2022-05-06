@@ -5,9 +5,18 @@ import Home from "./layouts/Home/Home";
 import {useDispatch} from "react-redux"
 import { token } from "./api/userApi";
 import { thchangeAuAC } from "./store/actiions/authAction";
+import {useLocation} from "react-router-dom";
+
 function App() {
   const dispatch = useDispatch()
   const { darkMode } = useContext(DarkModeContext);
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    setTimeout(()=>{
+      window.scrollTo({top: 0, left: 0, behavior: 'smooth' });
+    },100)
+  }, [pathname]);
 
   useEffect(()=>{
     token !== null && dispatch(thchangeAuAC(true));

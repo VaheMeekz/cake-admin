@@ -88,14 +88,12 @@ const Products = () => {
     const [cake, setCake] = useState(false);
     const limit = 5;
     const [currentId, setCurrentId] = useState(null);
-    const [cuurentAddition, setCurrentAddition] = useState(null)
     const [data, setData] = useState(null);
     const [page, setPage] = useState(0);
     const [pages, setPages] = useState([]);
     const [value, setValue] = useState(0);
     const [addValue, seAddValue] = useState(0);
     const [thisImg, setThisImg] = useState([]);
-    const [additionEddit, setAdditionEdit] = useState(false)
     const [cake_count, setCakeCount] = useState();
     const [cake_price, setCakePrice] = useState();
     const [cuurentEditImage, setCuurentEditImage] = useState(null)
@@ -110,17 +108,9 @@ const Products = () => {
     const [image, setImage] = useState();
     const [price, setPrice] = useState();
     const [category, setCategory] = useState();
-    const [cakeCountNew, setCakeCountNew] = useState()
-    const [cakePrceNew, setCakePriceNew] = useState()
     const [londDescHy, setLongDescHy] = useState()
     const [londDescRu, setLongDescRu] = useState()
     const [londDescEn, setLongDescEn] = useState()
-    const [adition_info_hyNew, setAditionInfoHyNew] = useState();
-    const [adition_info_ruNew, setAditionInfoRuNew] = useState();
-    const [adition_info_enNew, setAditionInfoEnNew] = useState();
-    const [cake_addition_name_hyNew, setCakeAditionNameHyNew] = useState();
-    const [cake_addition_name_ruNew, setCakeAditionNameRuNew] = useState();
-    const [cake_addition_name_enNew, setCakeAditionNameEnNew] = useState();
     const [cake_addition_priceNew, setCakeAditionPriceNew] = useState();
     const [editImage, setEditImage] = useState(null)
     const [search, setSearch] = useState()
@@ -182,6 +172,12 @@ const Products = () => {
         values.splice(values.findIndex((value) => value.id === id));
         setInputFields(values);
     };
+
+    useEffect(() => {
+        setTimeout(() => {
+            window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+        }, 100)
+    }, [page, limit]);
 
     useEffect(() => {
         let cakeCount = inputFields.map(function (item) {
@@ -408,17 +404,9 @@ const Products = () => {
         setPrice(row.price);
         setImage(row.image);
         setCategory(row.category_id);
-        setCakeCountNew(row.cake_count)
-        setCakePriceNew(row.cake_price)
         setLongDescHy(row.long_description_hy)
         setLongDescRu(row.long_description_ey)
         setLongDescEn(row.long_description_en)
-        setAditionInfoHyNew(row.adition_info_hy)
-        setAditionInfoRuNew(row.adition_info_ru)
-        setAditionInfoEnNew(row.adition_info_en)
-        setCakeAditionNameHyNew(row.cake_addition_name_hy)
-        setCakeAditionNameRuNew(row.cake_addition_name_ru)
-        setCakeAditionNameEnNew(row.cake_addition_name_en)
         setCakeAditionPriceNew(row.cake_addition_price)
     };
 
@@ -530,9 +518,12 @@ const Products = () => {
             });
     };
 
-    const handleAddition = (e, index) => {
-        // setCakeAditionNameHyNew(cake_addition_name_hyNew.split(",")[index] = e.target.value)
+
+    const handleDeleteUploadedImage = (id) => {
+        let newArr = thisImg.filter((word,index) => index !== id)
+        setThisImg(newArr)
     }
+
 
     const handleEditImage = (index) => {
         axios
@@ -562,7 +553,7 @@ const Products = () => {
             });
     }
 
-    return (<Box m={3}>
+    return (<Box m={3} className="boxHeigth">
         <h2 mt={3} mb={3}>
             Products
         </h2>
@@ -573,7 +564,7 @@ const Products = () => {
         </Box>
         <hr/>
         <Box m={2}>
-            <Button variant="contained" onClick={() => setOpenAdd(true)}>
+            <Button color="secondary" variant="contained" onClick={() => setOpenAdd(true)}>
                 <AddIcon/>
             </Button>
         </Box>
@@ -626,15 +617,17 @@ const Products = () => {
                                 {row.createdAt.substr(0, 10)}
                             </TableCell>
                             <TableCell align="left">
-                                <EditIcon onClick={() => transport(row)}/>
+                                <Button color="secondary" variant="outlined" onClick={() => transport(row)} autoFocus>
+                                    <EditIcon/>
+                                </Button>
                             </TableCell>
                             <TableCell align="left">
-                                <DeleteIcon
-                                    onClick={() => {
-                                        setOpenDelete(true);
-                                        setCurrentId(row.id);
-                                    }}
-                                />
+                                <Button color="secondary" variant="outlined" onClick={() => {
+                                    setOpenDelete(true);
+                                    setCurrentId(row.id);
+                                }} autoFocus>
+                                    <DeleteIcon className="iconsPreferances"/>
+                                </Button>
                             </TableCell>
                         </TableRow>))}
                     </TableBody>
@@ -645,7 +638,7 @@ const Products = () => {
         <Box>
             {search && search.length ? null : (
                 <div className="pagBox">
-                    <div>
+                    <div className="arrowBack">
                         {pages.length - 1 == page ? (<ArrowBackIcon
                             onClick={() => {
                                 setPage(page - 1);
@@ -659,11 +652,14 @@ const Products = () => {
                             onClick={() => {
                                 setPage(s);
                             }}
+                            style={{
+                                cursor: "pointer"
+                            }}
                         >
                             {s + 1}
                         </div>);
                     })}
-                    <div>
+                    <div className="arrowBack">
                         {pages.length - 1 == page ? null : (<ArrowForwardIcon
                             onClick={() => {
                                 setPage(page + 1);
@@ -689,6 +685,8 @@ const Products = () => {
                                 value={value}
                                 onChange={handleChange}
                                 aria-label="basic tabs example"
+                                textColor="secondary"
+                                indicatorColor="secondary"
                             >
                                 <Tab label="Hy" {...a11yProps(0)} />
                                 <Tab label="Ru" {...a11yProps(1)} />
@@ -725,32 +723,6 @@ const Products = () => {
                                 onChange={(e) => setLongDescHy(e.target.value)}
                             />
                             <h4>Addition Info</h4>
-                            {/*<textarea*/}
-                            {/*    id="w3review"*/}
-                            {/*    name="textHy"*/}
-                            {/*    rows="4"*/}
-                            {/*    cols="50"*/}
-                            {/*    className="textareaText"*/}
-                            {/*    value={adition_info_hyNew}*/}
-                            {/*    onChange={(e) => setAditionInfoHyNew(e.target.value)}*/}
-                            {/*/>*/}
-                            {/*{cake_addition_name_hyNew !== "" && <h4>Addition</h4>}*/}
-
-                            {/*{cake_addition_name_hyNew && cake_addition_name_hyNew.split(",").map((i, index) => {*/}
-                            {/*    return (<div style={{margin: "10px"}} key={index}>*/}
-                            {/*        <p>{i}</p>*/}
-                            {/*        <Button onClick={() => {*/}
-                            {/*            setAdditionEdit(true);*/}
-                            {/*            setCurrentAddition(index)*/}
-                            {/*        }}>Edit</Button>*/}
-                            {/*        {additionEddit && cake_addition_name_hyNew.split(",").filter((i, index) => index == cuurentAddition ?*/}
-                            {/*            <TextField variant="outlined"*/}
-                            {/*                       value={cake_addition_name_hyNew.split(",")[cuurentAddition]}*/}
-                            {/*                       onChange={(e) => {*/}
-                            {/*                           handleAddition(e, cuurentAddition)*/}
-                            {/*                       }}/> : null)}*/}
-                            {/*    </div>)*/}
-                            {/*})}*/}
                         </TabPanel>
                         <TabPanel value={value} index={1}>
                             <h4>Name</h4>
@@ -782,25 +754,6 @@ const Products = () => {
                                 onChange={(e) => setLongDescRu(e.target.value)}
                             />
                             <h4>Addition Info</h4>
-                            {/*<textarea*/}
-                            {/*    id="w3review"*/}
-                            {/*    name="textHy"*/}
-                            {/*    rows="4"*/}
-                            {/*    cols="50"*/}
-                            {/*    className="textareaText"*/}
-                            {/*    value={adition_info_ruNew}*/}
-                            {/*    onChange={(e) => setAditionInfoRuNew(e.target.value)}*/}
-                            {/*/>*/}
-                            {/*{cake_addition_name_ruNew !== "" && <h4>Addition</h4>}*/}
-
-                            {/*{cake_addition_name_ruNew && cake_addition_name_ruNew.split(",").map((i, index) => {*/}
-                            {/*    return (<div style={{margin: "10px"}} key={index}>*/}
-                            {/*        <TextField variant="outlined" value={i} onChange={(e) => {*/}
-                            {/*            let newValue = e.target.value;*/}
-                            {/*            cake_addition_name_ruNew.split(",")[index] = newValue*/}
-                            {/*            setCakeAditionNameRuNew(cake_addition_name_ruNew)*/}
-                            {/*        }}/></div>)*/}
-                            {/*})}*/}
                         </TabPanel>
                         <TabPanel value={value} index={2}>
                             <h4>Name</h4>
@@ -831,39 +784,19 @@ const Products = () => {
                                 value={londDescEn}
                                 onChange={(e) => setLongDescEn(e.target.value)}
                             />
-                            {/*<h4>Addition Info</h4>*/}
-                            {/*<textarea*/}
-                            {/*    id="w3review"*/}
-                            {/*    name="textHy"*/}
-                            {/*    rows="4"*/}
-                            {/*    cols="50"*/}
-                            {/*    className="textareaText"*/}
-                            {/*    value={adition_info_enNew}*/}
-                            {/*    onChange={(e) => setAditionInfoEnNew(e.target.value)}*/}
-                            {/*/>*/}
-                            {/*{cake_addition_name_enNew !== "" && <h4>Addition</h4>}*/}
-
-                            {/*{cake_addition_name_enNew && cake_addition_name_enNew.split(",").map((i, index) => {*/}
-                            {/*    return (<div style={{margin: "10px"}} key={index}>*/}
-                            {/*        <TextField variant="outlined" value={i} onChange={(e) => {*/}
-                            {/*            let newValue = e.target.value;*/}
-                            {/*            cake_addition_name_enNew.split(",")[index] = newValue*/}
-                            {/*            setCakeAditionNameEnNew(cake_addition_name_enNew)*/}
-                            {/*        }}/></div>)*/}
-                            {/*})}*/}
                         </TabPanel>
                     </Box>
                     <Box ml={2}>
                         <h3>Price</h3>
                         <TextField
                             id="outlined-basic"
-                            variant="outlined"
+                            variant="standard"
                             value={price}
                             onChange={(e) => setPrice(e.target.value)}
                         />
                     </Box>
                     <Box m={2}>
-                        <Button variant="contained" onClick={handleEdit}>
+                        <Button color="secondary" variant="contained" onClick={handleEdit}>
                             Submit
                         </Button>
                     </Box>
@@ -901,7 +834,7 @@ const Products = () => {
 
                                 <Box>
                                     <div className="uploadBtns">
-                                        <Button component="label" variant="contained">
+                                        <Button color="secondary" component="label" variant="contained">
                                             Upload edited image
                                             <input type="file" hidden multiple onChange={(e) => {
                                                 handleFileEdit(e)
@@ -915,9 +848,7 @@ const Products = () => {
                     </Box>
                 </Box>
             </Modal>
-
             {/* del */}
-
             <Modal
                 open={openDel}
                 onClose={() => setOpenDelete(false)}
@@ -929,10 +860,10 @@ const Products = () => {
                         Delete
                     </Typography>
                     <DialogActions>
-                        <Button variant="contained" onClick={() => setOpenDelete(false)}>
+                        <Button color="error" variant="contained" onClick={() => setOpenDelete(false)}>
                             No
                         </Button>
-                        <Button variant="contained" onClick={handleDelete}>
+                        <Button color="secondary" variant="contained" onClick={handleDelete}>
                             Yes
                         </Button>
                     </DialogActions>
@@ -955,6 +886,8 @@ const Products = () => {
                                 value={addValue}
                                 onChange={handleChangeAdd}
                                 aria-label="basic tabs example"
+                                textColor="secondary"
+                                indicatorColor="secondary"
                             >
                                 <Tab label="Hy" {...a11yProps(0)} />
                                 <Tab label="Ru" {...a11yProps(1)} />
@@ -981,6 +914,28 @@ const Products = () => {
                                 value={descriptionNewHy}
                                 onChange={(e) => setDescripNewHy(e.target.value)}
                             />
+                            <h3>Addition Description</h3>
+                            <textarea
+                                id="w3review"
+                                name="textHy"
+                                rows="8"
+                                value={adition_info_hy}
+                                onChange={(e) => setAditionInfoHy(e.target.value)}
+                                maxLength="600"
+                                cols="50"
+                                className="textareaText"
+                            />
+                            <h3>Long Description</h3>
+                            <textarea
+                                id="w3review"
+                                name="textHy"
+                                rows="8"
+                                value={long_description_hy}
+                                onChange={(e) => setLongDescriotionHy(e.target.value)}
+                                maxLength="600"
+                                cols="50"
+                                className="textareaText"
+                            />
                         </TabPanel>
                         <TabPanel value={addValue} index={1}>
                             <h4>Name</h4>
@@ -1001,6 +956,28 @@ const Products = () => {
                                 className="textareaText"
                                 value={descriptionNewRu}
                                 onChange={(e) => setDescripNewRu(e.target.value)}
+                            />
+                            <h3>Addition Description</h3>
+                            <textarea
+                                id="w3review"
+                                name="textHy"
+                                rows="8"
+                                value={adition_info_ru}
+                                onChange={(e) => setAditionInfoRu(e.target.value)}
+                                maxLength="600"
+                                cols="50"
+                                className="textareaText"
+                            />
+                            <h3>Long Description</h3>
+                            <textarea
+                                id="w3review"
+                                name="textHy"
+                                rows="8"
+                                value={long_description_ey}
+                                onChange={(e) => setLongDescriotionRu(e.target.value)}
+                                maxLength="600"
+                                cols="50"
+                                className="textareaText"
                             />
                         </TabPanel>
                         <TabPanel value={addValue} index={2}>
@@ -1023,10 +1000,34 @@ const Products = () => {
                                 value={descriptionNewEn}
                                 onChange={(e) => setDescripNewEn(e.target.value)}
                             />
+                            <h3>Addition Description</h3>
+                            <textarea
+                                id="w3review"
+                                name="textHy"
+                                rows="8"
+                                value={adition_info_ru}
+                                onChange={(e) => setAditionInfoRu(e.target.value)}
+                                maxLength="600"
+                                cols="50"
+                                className="textareaText"
+                            />
+                            <h3>Long Description</h3>
+                            <textarea
+                                id="w3review"
+                                name="textHy"
+                                rows="8"
+                                value={long_description_en}
+                                onChange={(e) => setLongDescriotionEn(e.target.value)}
+                                maxLength="600"
+                                cols="50"
+                                className="textareaText"
+                            />
                         </TabPanel>
                     </Box>
                     <Box m={2}>
-                        <h4>Price</h4>
+                        <h4 style={{
+                            marginBottom: "10px"
+                        }}>Price</h4>
                         <TextField
                             fullWidth
                             id="outlined-basic"
@@ -1037,9 +1038,10 @@ const Products = () => {
                         />
                     </Box>
                     <Box>
-                        <h4>Category</h4>
+                        <h4 style={{
+                            marginBottom: "10px"
+                        }}>Category</h4>
                         <FormControl fullWidth>
-                            <InputLabel id="demo-simple-select-label"> choose</InputLabel>
                             <Select
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
@@ -1183,6 +1185,7 @@ const Products = () => {
                                                         handleAddFieldsHy();
                                                     }}
                                                     variant="outlined"
+                                                    color="secondary"
                                                 >
                                                     <i class="fa-solid fa-plus">Add</i>
                                                 </Button>
@@ -1221,6 +1224,7 @@ const Products = () => {
                                                         handleAddFieldsRu();
                                                     }}
                                                     variant="outlined"
+                                                    color="secondary"
                                                 >
                                                     <i class="fa-solid fa-plus">Add</i>
                                                 </Button>
@@ -1259,6 +1263,7 @@ const Products = () => {
                                                         handleAddFieldsEn();
                                                     }}
                                                     variant="outlined"
+                                                    color="secondary"
                                                 >
                                                     <i class="fa-solid fa-plus">Add</i>
                                                 </Button>
@@ -1270,133 +1275,36 @@ const Products = () => {
                             </Box>
                         </div>) : null}
                     </Box>
-                    <Box m={2}>
-                        <h3>Long Description</h3>
-                        <Box sx={{width: "100%"}}>
-                            <Box sx={{borderBottom: 1, borderColor: "divider"}}>
-                                <Tabs
-                                    value={openLong}
-                                    onChange={handleOpenLong}
-                                    aria-label="basic tabs example"
-                                >
-                                    <Tab label="Hy" {...a11yProps(0)} />
-                                    <Tab label="Ru" {...a11yProps(1)} />
-                                    <Tab label="En" {...a11yProps(2)} />
-                                </Tabs>
-                            </Box>
-                            <TabPanel value={openLong} index={0}>
-                  <textarea
-                      id="w3review"
-                      name="textHy"
-                      rows="8"
-                      value={long_description_hy}
-                      onChange={(e) => setLongDescriotionHy(e.target.value)}
-                      maxlength="600"
-                      cols="50"
-                      className="textareaText"
-                  />
-                            </TabPanel>
-                            <TabPanel value={openLong} index={1}>
-                  <textarea
-                      id="w3review"
-                      name="textHy"
-                      rows="8"
-                      value={long_description_ey}
-                      onChange={(e) => setLongDescriotionRu(e.target.value)}
-                      maxlength="600"
-                      cols="50"
-                      className="textareaText"
-                  />
-                            </TabPanel>
-                            <TabPanel value={openLong} index={2}>
-                  <textarea
-                      id="w3review"
-                      name="textHy"
-                      rows="8"
-                      value={long_description_en}
-                      onChange={(e) => setLongDescriotionEn(e.target.value)}
-                      maxlength="600"
-                      cols="50"
-                      className="textareaText"
-                  />
-                            </TabPanel>
-                        </Box>
-                    </Box>
-                    <Box m={2}>
-                        <h3>Addition Description</h3>
-                        <Box sx={{width: "100%"}}>
-                            <Box sx={{borderBottom: 1, borderColor: "divider"}}>
-                                <Tabs
-                                    value={additionInfo}
-                                    onChange={handleAdditionInfo}
-                                    aria-label="basic tabs example"
-                                >
-                                    <Tab label="Hy" {...a11yProps(0)} />
-                                    <Tab label="Ru" {...a11yProps(1)} />
-                                    <Tab label="En" {...a11yProps(2)} />
-                                </Tabs>
-                            </Box>
-                            <TabPanel value={additionInfo} index={0}>
-                  <textarea
-                      id="w3review"
-                      name="textHy"
-                      rows="8"
-                      value={adition_info_hy}
-                      onChange={(e) => setAditionInfoHy(e.target.value)}
-                      maxlength="600"
-                      cols="50"
-                      className="textareaText"
-                  />
-                            </TabPanel>
-                            <TabPanel value={additionInfo} index={1}>
-                  <textarea
-                      id="w3review"
-                      name="textHy"
-                      rows="8"
-                      value={adition_info_ru}
-                      onChange={(e) => setAditionInfoRu(e.target.value)}
-                      maxlength="600"
-                      cols="50"
-                      className="textareaText"
-                  />
-                            </TabPanel>
-                            <TabPanel value={additionInfo} index={2}>
-                  <textarea
-                      id="w3review"
-                      name="textHy"
-                      rows="8"
-                      value={adition_info_en}
-                      onChange={(e) => setAditionInfoEn(e.target.value)}
-                      maxlength="600"
-                      cols="50"
-                      className="textareaText"
-                  />
-                            </TabPanel>
-                        </Box>
-                    </Box>
                     <Box>
                         <div className="uploadBtns">
-                            <Button variant="contained" component="label">
-                                Upload
+                            <Button color="secondary" variant="contained" component="label">
+                                Upload Image
                                 <input type="file" hidden multiple onChange={handleFile}/>
                             </Button>
                         </div>
                         <div>
-                            {thisImg.length && thisImg.map((i) => {
-                                return (<img
-                                    key={i.toString()}
-                                    src={i}
-                                    alt="newImage"
-                                    width={100}
-                                    height={100}
-                                    style={{margin: "10px"}}
-                                />);
-                            })}
+                            {thisImg.length ? thisImg.map((i, index) => {
+                                return (
+                                    <div>
+                                        <img
+                                            key={i.toString()}
+                                            src={i}
+                                            alt="newImage"
+                                            width={100}
+                                            height={100}
+                                            style={{margin: "10px"}}
+                                        />
+                                        <Button variant="outlined" color="error"  color="secondary"
+                                                onClick={() => handleDeleteUploadedImage(index)}>Delete This
+                                            Image</Button>
+                                    </div>
+                                );
+                            }) : null}
                             {thisImg.length >= 5 && (<h3 className="errorText">Նկարները շատ են 5֊ից</h3>)}
                         </div>
                     </Box>
                     <DialogActions>
-                        <Button variant="contained" onClick={handleAddProduct}>
+                        <Button color="secondary" variant="contained" onClick={handleAddProduct}>
                             Add Product
                         </Button>
                     </DialogActions>

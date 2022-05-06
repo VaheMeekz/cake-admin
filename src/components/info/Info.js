@@ -51,7 +51,7 @@ const Info = () => {
   };
 
   return (
-    <Box m={3}>
+    <Box m={3} className="boxHeigth">
       <h2 mt={3} mb={3}>
         Info Settings
       </h2>
@@ -119,7 +119,7 @@ const Info = () => {
 
           <hr className="hr" />
           <div>
-            <Button variant="contained" onClick={handleEdit}>
+            <Button variant="contained" onClick={handleEdit} color="secondary">
               Submit
             </Button>
           </div>

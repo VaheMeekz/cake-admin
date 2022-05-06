@@ -11,6 +11,8 @@ import { getAboutUsBannerThunk } from "../../store/actiions/bannersActions";
 import axios from "axios";
 import { baseUrl, token } from "../../api/userApi";
 import Swal from "sweetalert2";
+import ArrowDropUpSharpIcon from "@mui/icons-material/ArrowDropUpSharp";
+import ArrowDropDownSharpIcon from "@mui/icons-material/ArrowDropDownSharp";
 const style = {
   position: "absolute",
   top: "50%",
@@ -75,7 +77,7 @@ const AboutBanner = () => {
   const [subTitleEn, setSubTitleEn] = useState("");
   const [image, setimage] = useState();
   const [thisImg, setThisImg] = useState(null);
-
+  const [openSection,setOPenSection] = useState(false)
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -189,12 +191,28 @@ const AboutBanner = () => {
       <h2 mt={3} mb={3}>
         About Us Page Banner
       </h2>
+      <Box>
+        {
+          openSection ? (
+              <Button variant="outlined" color="secondary" onClick={()=>setOPenSection(!openSection)}>
+                <ArrowDropUpSharpIcon/>
+              </Button>
+          ) : (
+              <Button variant="outlined" color="secondary" onClick={()=>setOPenSection(!openSection)}>
+                <ArrowDropDownSharpIcon/>
+              </Button>)
+        }
+      </Box>
+      {openSection ? (
+      <Box>
       <Box sx={{ width: "100%" }}>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <Tabs
             value={value}
             onChange={handleChange}
             aria-label="basic tabs example"
+            textColor="secondary"
+            indicatorColor="secondary"
           >
             <Tab label="Hy" {...a11yProps(0)} />
             <Tab label="Ru" {...a11yProps(1)} />
@@ -263,7 +281,7 @@ const AboutBanner = () => {
           />
         </TabPanel>
         <Box m={2}>
-          <Button variant="contained" onClick={handleEditTexts}>
+          <Button color="secondary" variant="contained" onClick={handleEditTexts}>
             Submit
           </Button>
         </Box>
@@ -277,7 +295,7 @@ const AboutBanner = () => {
           className="uploadedImage"
         />
         <br />
-        <Button variant="contained" onClick={handleOpen}>
+        <Button color="secondary" variant="contained" onClick={handleOpen}>
           Edit
         </Button>
         <Modal
@@ -293,13 +311,13 @@ const AboutBanner = () => {
             <div className="imageArea">
               <div>
                 <div className="uploadBtns">
-                  <Button variant="contained" component="label">
+                  <Button color="secondary" variant="contained" component="label">
                     Upload
                     <input type="file" hidden multiple onChange={handleFile} />
                   </Button>
                 </div>
                 <div className="uploadBtns" m={2}>
-                  <Button variant="contained" onClick={handleSubmit}>
+                  <Button color="secondary" variant="contained" onClick={handleSubmit}>
                     Submit
                   </Button>
                 </div>
@@ -313,6 +331,7 @@ const AboutBanner = () => {
           </Box>
         </Modal>
       </Box>
+      </Box>) : null}
     </Box>
   );
 };

@@ -158,10 +158,10 @@ const Delevery = () => {
         }
     }
     return (
-        <Box m={3}>
+        <Box m={3} className="boxHeigth">
             <h2 mt={3} mb={3}>Delivery Settings</h2>
             <Box>
-                <Button variant="contained" onClick={handleOpen}>Add</Button>
+                <Button color="secondary" variant="contained" onClick={handleOpen}>Add</Button>
             </Box>
             <Box m={2}>
                 <TableContainer component={Paper}>
@@ -184,16 +184,20 @@ const Delevery = () => {
                                         {row.loacation}
                                     </TableCell>
                                     <TableCell align="left">{row.price}</TableCell>
-                                    <TableCell align="left"><DeleteIcon onClick={() => {
-                                        setCurrentId(row.id)
-                                        setOpenDel(true)
-                                    }}/></TableCell>
-                                    <TableCell align="left"><EditIcon onClick={() => {
-                                        setCurrentId(row.id)
-                                        setOpenEdit(true)
-                                        setThisPrice(row.price)
-                                        setThisLocation(row.loacation)
-                                    }}/></TableCell>
+                                    <TableCell align="left" color="secondary" >
+                                        <Button variant="outlined" color="secondary" onClick={() => {
+                                            setCurrentId(row.id)
+                                            setOpenDel(true)
+                                        }}>
+                                        <DeleteIcon /></Button></TableCell>
+                                    <TableCell align="left">
+                                        <Button variant="outlined" color="secondary" onClick={() => {
+                                            setCurrentId(row.id)
+                                            setOpenEdit(true)
+                                            setThisPrice(row.price)
+                                            setThisLocation(row.loacation)
+                                        }}>
+                                        <EditIcon /></Button></TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
@@ -221,7 +225,7 @@ const Delevery = () => {
                                        value={newPrice} onChange={e => setNewPrice(e.target.value)}
                             /></div>
                         <DialogActions>
-                            <Button variant="contained" onClick={handleSubmit}>Submit</Button>
+                            <Button color="secondary" variant="contained" onClick={handleSubmit}>Submit</Button>
                         </DialogActions>
 
                     </Box>
@@ -239,8 +243,8 @@ const Delevery = () => {
                         Delete delivery location
                     </Typography>
                     <DialogActions>
-                        <Button variant="contained" onClick={() => setOpenDel(false)}>No</Button>
-                        <Button variant="contained" onClick={handleDelete}>Yes</Button>
+                        <Button  color="secondary" variant="contained" onClick={() => setOpenDel(false)}>No</Button>
+                        <Button  color="secondary" variant="contained" onClick={handleDelete}>Yes</Button>
                     </DialogActions>
                 </Box>
             </Modal>
@@ -266,8 +270,8 @@ const Delevery = () => {
                             /></div>
                     </Box>
                     <DialogActions>
-                        <Button variant="contained" onClick={() => setOpenEdit(false)}>Cancle</Button>
-                        <Button variant="contained" onClick={handleEdit}>Edit</Button>
+                        <Button color="secondary" variant="contained" onClick={() => setOpenEdit(false)}>Cancle</Button>
+                        <Button color="secondary" variant="contained" onClick={handleEdit}>Edit</Button>
                     </DialogActions>
                 </Box>
             </Modal>

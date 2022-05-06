@@ -12,7 +12,7 @@ import DetailBanner from "../bannerComponents/detailBanner";
 const Banners = () => {
     useEffect(()=>console.clear(),[])
   return (
-    <Box m={3}>
+    <Box m={3} className="boxHeigth">
       <h1 mt={3} mb={3}>
         Banners Settings
       </h1>

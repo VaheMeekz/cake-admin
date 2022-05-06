@@ -184,7 +184,7 @@ const Orders = () => {
     }, [count, limit]);
 
     return (
-        <Box m={3}>
+        <Box m={3} className="boxHeigth">
             <h2 t={3} mb={3}>
                 Orders
             </h2>
@@ -206,7 +206,7 @@ const Orders = () => {
                 </Table>
             </TableContainer>
             <div className="pagBox">
-                <div>
+                <div className="arrowBack">
                     {pages.length - 1 == page ? (
                         <ArrowBackIcon
                             onClick={() => {
@@ -223,13 +223,15 @@ const Orders = () => {
                                 key={s}
                                 onClick={() => {
                                     setPage(s);
-                                }}
+                                }}style={{
+                                cursor:"pointer"
+                            }}
                             >
                                 {s + 1}
                             </div>
                         );
                     })}
-                <div>
+                <div className="arrowBack">
                     {pages.length - 1 == page ? null : (
                         <ArrowForwardIcon
                             onClick={() => {

@@ -128,7 +128,7 @@ const ContactUs = () => {
       });
   };
   return (
-    <Box m={3}>
+    <Box m={3} className="boxHeigth">
       <h2 mt={3} mb={3}>
         Contacts
       </h2>
@@ -176,20 +176,19 @@ const ContactUs = () => {
                   <TableCell align="left">{row.subject}</TableCell>
                   <TableCell align="left">{row.message}</TableCell>
                   <TableCell align="left" className="delBtn">
-                    <MarkEmailReadIcon
-                      onClick={() => {
-                        setCurrentId(row.id);
-                        setOpen(true);
-                      }}
-                    />
+                    <Button variant="outlined" color="secondary"  onClick={() => {
+                      setCurrentId(row.id);
+                      setOpen(true);
+                    }}>                    <MarkEmailReadIcon/>
+                    </Button>
                   </TableCell>
                   <TableCell align="left" className="delBtn">
-                    <DeleteIcon
-                      onClick={() => {
-                        setCurrentId(row.id);
-                        setOpenDelete(true);
-                      }}
-                    />
+                    <Button variant="outlined" color="secondary" onClick={() => {
+                      setCurrentId(row.id);
+                      setOpenDelete(true);
+                    }}>                    <DeleteIcon/>
+                    </Button>
+
                   </TableCell>
                 </TableRow>
               ))}
@@ -198,7 +197,7 @@ const ContactUs = () => {
       </TableContainer>
       <Box m={3}>
         <div className="pagBox">
-          <div>
+          <div className="arrowBack">
             {pages.length - 1 == page ? (
               <ArrowBackIcon
                 onClick={() => {
@@ -216,12 +215,15 @@ const ContactUs = () => {
                   onClick={() => {
                     setPage(s);
                   }}
+                  style={{
+                    cursor:"pointer"
+                  }}
                 >
                   {s + 1}
                 </div>
               );
             })}
-          <div>
+          <div className="arrowBack">
             {pages.length - 1 == page ? null : (
               <ArrowForwardIcon
                 onClick={() => {

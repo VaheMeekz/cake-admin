@@ -47,11 +47,11 @@ const ProductEditImage = ({image,editImage,index,handleEditImage,cuurentEditImag
             <img src={image} alt={"image"} width={200} style={{margin: "20px"}}/>
             {
                 cuurentEditImage == index &&  editImage &&
-                <Button onClick={() => handleEditImage(index)}
+                <Button  color="secondary"  onClick={() => handleEditImage(index)}
                         variant="contained">Edit</Button>
             }
             <Box style={{margin:"10px"}}>
-                <Button  variant="contained" onClick={handleClick}>Delete image</Button>
+                <Button  color="error"   variant="outlined" onClick={handleClick} autoFocus>Delete Image</Button>
                 <Menu
                     id="basic-menu"
                     anchorEl={anchorEl}

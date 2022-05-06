@@ -17,8 +17,10 @@ const Pages = () => {
         : isntAuthPages.map((i) => {
             return <Route path={i.path} element={<i.Component />} key={i.id} />;
           })}
-      {/*<Navigate replace to={NOTFOUND_PAGE} />*/}
-      <Route path="*" element={<NotFound />} />
+        {
+            isAuth &&  <Route path="*" element={<NotFound />} />
+        }
+
     </Routes>
   );
 };

@@ -10,6 +10,8 @@ import axios from "axios";
 import { baseUrl, token } from "../../api/userApi";
 import { useSelector, useDispatch } from "react-redux";
 import { getHomeBannerThunk } from "../../store/actiions/bannersActions";
+import ArrowDropDownSharpIcon from '@mui/icons-material/ArrowDropDownSharp';
+import ArrowDropUpSharpIcon from '@mui/icons-material/ArrowDropUpSharp';
 import Swal from "sweetalert2";
 const style = {
   position: "absolute",
@@ -66,6 +68,7 @@ const HomeBanner = () => {
   const [oneImg, setOneImg] = useState();
   const [twoImg, setTwoImg] = useState();
   const [thisImg, setThisImg] = useState(null);
+  const [openSection,setOPenSection] = useState(false)
 
   useEffect(() => {
     dispatch(getHomeBannerThunk());
@@ -234,12 +237,28 @@ const HomeBanner = () => {
       <h2 mt={3} mb={3}>
         Home Page Banner
       </h2>
+      <Box>
+        {
+          openSection ? (
+              <Button variant="outlined" color="secondary" onClick={()=>setOPenSection(!openSection)}>
+                <ArrowDropUpSharpIcon/>
+              </Button>
+          ) : (
+              <Button variant="outlined" color="secondary" onClick={()=>setOPenSection(!openSection)}>
+              <ArrowDropDownSharpIcon/>
+              </Button>)
+        }
+      </Box>
+      { openSection ? (
+      <Box>
       <Box sx={{ width: "100%" }}>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <Tabs
             value={value}
             onChange={handleChange}
             aria-label="basic tabs example"
+            textColor="secondary"
+            indicatorColor="secondary"
           >
             <Tab label="Am" {...a11yProps(0)} />
             <Tab label="Ru" {...a11yProps(1)} />
@@ -300,7 +319,7 @@ const HomeBanner = () => {
             onChange={(e) => setSubTitleEn(e.target.value)}
           />
         </TabPanel>
-        <Button variant="contained" onClick={handleChangeTexts}>
+        <Button color="secondary" variant="contained" onClick={handleChangeTexts}>
           Submit
         </Button>
       </Box>
@@ -314,7 +333,7 @@ const HomeBanner = () => {
             className="uploadedImage"
           />
           <br />
-          <Button
+          <Button color="secondary"
             variant="contained"
             onClick={() => {
               setCurrentId(1);
@@ -334,7 +353,7 @@ const HomeBanner = () => {
             className="uploadedImage"
           />
           <br />
-          <Button
+          <Button color="secondary"
             variant="contained"
             onClick={() => {
               setCurrentId(2);
@@ -358,13 +377,13 @@ const HomeBanner = () => {
             <div className="imageArea">
               <div>
                 <div className="uploadBtns">
-                  <Button variant="contained" component="label">
+                  <Button color="secondary" variant="contained" component="label">
                     Upload
                     <input type="file" hidden multiple onChange={handleFile} />
                   </Button>
                 </div>
                 <div className="uploadBtns" m={2}>
-                  <Button variant="contained" onClick={handleSubmit}>
+                  <Button color="secondary" variant="contained" onClick={handleSubmit}>
                     Submit
                   </Button>
                 </div>
@@ -377,7 +396,8 @@ const HomeBanner = () => {
             </div>
           </Box>
         </Modal>
-      </Box>
+        </Box>
+      </Box>):null}
     </Box>
   );
 };
