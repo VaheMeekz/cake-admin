@@ -9,7 +9,7 @@ import Paper from '@mui/material/Paper';
 import {Box, TextField} from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
-import {baseUrl, token} from "../../api/userApi";
+import {baseUrl, token} from "../../config/config";
 import Swal from "sweetalert2";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";

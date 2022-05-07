@@ -12,7 +12,7 @@ const Sidebar = () => {
     return (
         <div className="sidebar">
             <div className="top">
-                <Link to="/" style={{textDecoration: "none"}}>
+                <Link to="/users" style={{textDecoration: "none"}}>
           <span className="logo" style={{
               fontSize: "30px"
           }}>
@@ -42,14 +42,7 @@ const Sidebar = () => {
                                 </div>
                             );
                         })
-                        : (
-                            <Link to="/login" style={{textDecoration: "none"}}>
-                                <li>
-                                    <PersonOutlineIcon className="icon"/>
-                                    <span>Login</span>
-                                </li>
-                            </Link>
-                        )}
+                        :null}
                 </ul>
             </div>
         </div>

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Box, Button, TextField} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
-import {getChooseThunk} from "../../store/actiions/chooseAction";
+import {getChooseThunk} from "../../store/actions/chooseAction";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -15,7 +15,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import DialogActions from "@mui/material/DialogActions";
 import axios from "axios";
-import {baseUrl, token} from "../../api/userApi";
+import {baseUrl, token} from "../../config/config";
 import Swal from "sweetalert2";
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';

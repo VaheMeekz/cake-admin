@@ -20,10 +20,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { makeArray } from "../../helpers/makeArray";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import { baseUrl, token } from "../../api/userApi";
+import { baseUrl, token } from "../../config/config";
 import Swal from "sweetalert2";
 import axios from "axios";
-import { getSubscribersThunk } from "../../store/actiions/subscribersAction";
+import { getSubscribersThunk } from "../../store/actions/subscribersAction";
 const Subscribers = () => {
   const dispatch = useDispatch();
   const data = useSelector((state) => state?.subscribersReducer.subscribers);

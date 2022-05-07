@@ -13,7 +13,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import DialogActions from "@mui/material/DialogActions";
 import axios from "axios";
-import {baseUrl, token} from "../../api/userApi";
+import {baseUrl, token} from "../../config/config";
 import Swal from "sweetalert2";
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';

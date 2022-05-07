@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {Box, Button} from "@mui/material";
 import axios from "axios";
-import {baseUrl, token} from "../../api/userApi";
+import {baseUrl, token} from "../../config/config";
 import Swal from "sweetalert2";
 
 const ProductAddImage = ({setOpenEdit,currentId}) => {

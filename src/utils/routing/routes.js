@@ -10,7 +10,7 @@ import Products from "../../components/products/Products";
 import Subscribers from "../../components/subscribers/subscribers";
 import Users from "../../components/users/Users";
 import {
-    ABOUTUS_PAGE,
+    ABOUTUS_PAGE, ADMIN_PAGE,
     BANNERS_PAGE,
     CATEGORY_PAGE, CHOOSE_PAGE,
     CONTACTS_PAGE, DELEVERY_PAGE, FOOTER_PAGE,
@@ -34,8 +34,12 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import InfoIcon from '@mui/icons-material/Info';
 import BuildIcon from '@mui/icons-material/Build';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
+import InsertPhotoIcon from '@mui/icons-material/InsertPhoto';
+import Admins from "../../components/admins/Admins";
+import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
 export const isAuthPages = [
     {id: 1, path: USERS_PAGE, name: "Users", Component: Users,icon:<GroupIcon/>},
+    {id:13,path: ADMIN_PAGE,name:"Admins",Component:Admins,icon: <AutoFixHighIcon/>},
     {id: 2, path: PRODUCT_PAGE, name: "Products", Component: Products,icon:<DashboardIcon/>},
     {id: 9, path: ORDERS_PAGE, name: "Orders", Component: Orders,icon:<ProductionQuantityLimitsIcon/>},
     {id: 8, path: CATEGORY_PAGE, name: "Category", Component: Category,icon:<CategoryIcon/>},
@@ -46,7 +50,7 @@ export const isAuthPages = [
     {id: 3, path: JURISPRUDECE_PAGE, name: "Jurisrudece", Component: Jurisrudece,icon:<DashboardIcon/>},
     {id: 4, path: CONTACTS_PAGE, name: "Contact Us", Component: ContactUs,icon:<InfoIcon/>},
     {id: 5, path: SUBSCRIBERS_PAGE, name: "Subscribers", Component: Subscribers,icon:<GroupIcon/>},
-    {id: 6, path: BANNERS_PAGE, name: "Banners", Component: Banners,icon:<BuildIcon/>},
+    {id: 6, path: BANNERS_PAGE, name: "Banners", Component: Banners,icon:<InsertPhotoIcon/>},
     {id: 7, path: INFO_PAGE, name: "Info", Component: Info,icon:<InfoIcon/>},
 ];
 

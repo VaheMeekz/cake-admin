@@ -4,10 +4,11 @@ import Navbar from "../navbar/Navbar";
 import Pages from "../Pages/Pages";
 import Sidebar from "../sidebar/Sidebar";
 import "./home.scss";
-import {token} from "../../api/userApi";
-import {thchangeAuAC} from "../../store/actiions/authAction";
+import {token} from "../../config/config";
+import {thchangeAuAC} from "../../store/actions/authAction";
 import {useDispatch} from "react-redux";
 import Footer from "../footer/Footer";
+import {useLocation} from "react-router-dom";
 
 const Home = () => {
     const dispatch = useDispatch()
@@ -15,6 +16,7 @@ const Home = () => {
         token !== null && dispatch(thchangeAuAC(true));
     },[])
   const [close, setClose] = useState(true);
+
   return (
     <div className="home">
       {close ? <Sidebar /> : null}

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {getDetailBannerThunk} from "../../store/actiions/bannersActions";
+import {getDetailBannerThunk} from "../../store/actions/bannersActions";
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -9,7 +9,7 @@ import Box from '@mui/material/Box';
 import {TextField} from "@mui/material";
 import Button from "@mui/material/Button";
 import axios from "axios";
-import {baseUrl, token} from "../../api/userApi";
+import {baseUrl, token} from "../../config/config";
 import Swal from "sweetalert2";
 import Modal from '@mui/material/Modal'
 import ArrowDropUpSharpIcon from "@mui/icons-material/ArrowDropUpSharp";

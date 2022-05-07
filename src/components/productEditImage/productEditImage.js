@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import axios from "axios";
-import {baseUrl, token} from "../../api/userApi";
+import {baseUrl, token} from "../../config/config";
 import Swal from "sweetalert2";
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';

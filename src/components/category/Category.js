@@ -1,15 +1,16 @@
 import {Box} from "@mui/material";
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {getCategoryThunk} from "../../store/actiions/categoryAction";
+import {getCategoryThunk} from "../../store/actions/categoryAction";
 import {Button} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import "../aboutUs/aboutUs.scss";
 import axios from "axios";
 import Swal from "sweetalert2";
-import {baseUrl, token} from "../../api/userApi";
+import {baseUrl, token} from "../../config/config";
 import {TextField} from "@mui/material";
+import CategoryAddModal from "./CategoryAddModal";
 
 const style = {
     position: "absolute",
@@ -34,11 +35,6 @@ const Category = () => {
     const handleClose = () => setOpen(false);
     const handleCloseDelete = () => setOpenDelete(false);
     const handleCloseAdd = () => setOpenAdd(false);
-    //value
-    const [nameHy, setNameHy] = useState("");
-    const [nameRu, setNameRu] = useState("");
-    const [nameEn, setNameEn] = useState("");
-    //
     const [nameEditHy, setNameEditHy] = useState("");
     const [nameEditRu, setNameEditRu] = useState("");
     const [nameEditEn, setNameEditEn] = useState("");
@@ -67,42 +63,6 @@ const Category = () => {
             .then(function (response) {
                 if (!response.data.error) {
                     setOpenDelete(false);
-                    Swal.fire({
-                        position: "center",
-                        icon: "success",
-                        title: "Succses",
-                        showConfirmButton: false,
-                        timer: 1500,
-                    });
-                    setCategorys(response.data);
-                    setNameHy("");
-                    setNameRu("");
-                    setNameEn("");
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-    };
-
-    const handleAdd = () => {
-        axios
-            .post(
-                `${baseUrl}/category`,
-                {
-                    nameHy,
-                    nameRu,
-                    nameEn,
-                },
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                }
-            )
-            .then(function (response) {
-                if (!response.data.error) {
-                    setOpenAdd(false);
                     Swal.fire({
                         position: "center",
                         icon: "success",
@@ -284,53 +244,9 @@ const Category = () => {
                         </Typography>
                     </Box>
                 </Modal>
-
-                <Modal
-                    open={openAdd}
-                    onClose={handleCloseAdd}
-                    aria-labelledby="modal-modal-title"
-                    aria-describedby="modal-modal-description"
-                >
-                    <Box sx={style}>
-                        <Typography id="modal-modal-title" variant="h6" component="h2">
-                            <h3>Add</h3>
-                            <TextField
-                                id="filled-basic"
-                                label="Hy"
-                                variant="filled"
-                                className="addInp"
-                                value={nameHy}
-                                onChange={(e) => setNameHy(e.target.value)}
-                            />
-                            <TextField
-                                id="filled-basic"
-                                label="Ru"
-                                variant="filled"
-                                className="addInp"
-                                value={nameRu}
-                                onChange={(e) => setNameRu(e.target.value)}
-                            />
-                            <TextField
-                                id="filled-basic"
-                                label="En"
-                                variant="filled"
-                                className="addInp"
-                                value={nameEn}
-                                onChange={(e) => setNameEn(e.target.value)}
-                            />
-                        </Typography>
-                        <Typography
-                            className="btnsBox"
-                            id="modal-modal-description"
-                            sx={{mt: 2}}
-                        >
-                            <Button color="secondary" onClick={handleCloseAdd}>Close</Button>
-                            <Button  color="secondary" variant="contained" onClick={handleAdd}>
-                                Submit
-                            </Button>
-                        </Typography>
-                    </Box>
-                </Modal>
+                <CategoryAddModal openAdd={openAdd} handleCloseAdd={handleCloseAdd} style={style}
+                                  setOpenAdd={setOpenAdd} setCategorys={setCategorys}
+                />
             </Box>
         </Box>
     );

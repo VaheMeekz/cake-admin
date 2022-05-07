@@ -3,8 +3,8 @@ import { useContext, useEffect } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
 import Home from "./layouts/Home/Home";
 import {useDispatch} from "react-redux"
-import { token } from "./api/userApi";
-import { thchangeAuAC } from "./store/actiions/authAction";
+import { token } from "./config/config";
+import { thchangeAuAC } from "./store/actions/authAction";
 import {useLocation} from "react-router-dom";
 
 function App() {

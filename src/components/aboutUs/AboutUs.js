@@ -9,12 +9,13 @@ import {useDispatch, useSelector} from "react-redux";
 import {
     getAboutUsInfoThunk,
     getAboutUsThunk,
-} from "../../store/actiions/aboutUsAction";
+} from "../../store/actions/aboutUsAction";
 import "./aboutUs.scss";
-import {baseUrl, token} from "../../api/userApi";
+import {baseUrl, token} from "../../config/config";
 import axios from "axios";
 import Swal from "sweetalert2";
 import Modal from '@mui/material/Modal';
+import AboutUsInfo from "./AboutUsInfo";
 const style = {
     position: 'absolute',
     top: '50%',
@@ -67,9 +68,6 @@ const AboutUs = () => {
     const aboutUsInfo = useSelector((state) => state.aboutUsReducer.aboutUsInfo);
     const [value, setValue] = React.useState(0);
     const [data, setData] = useState({});
-    const [subTitleValue, setSubtitleValue] = React.useState(0);
-    const [infoOpen, setInfoOpen] = useState(0);
-    const [infoData, setInfoData] = useState({});
     const [images, setImages] = useState(null)
     const [rend, setRend] = useState(false);
     const [open, setOpen] = useState(false);
@@ -101,20 +99,8 @@ const AboutUs = () => {
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-    const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-    const handleChangeSubTitleTabs = (event, newValue) => {
-        setSubtitleValue(newValue);
-    };
 
-    const handleOpenInfoTabs = (event, newValue) => {
-        setInfoOpen(newValue);
-    };
-
-    const handleInfoChangeValues = (e) => {
-        infoData[e.target.name] = e.target.value;
-        setInfoData(infoData);
-    };
 
     const handleSubmit = () => {
         axios
@@ -144,30 +130,6 @@ const AboutUs = () => {
                         showConfirmButton: false,
                         timer: 1500,
                     });
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-    };
-
-    const handleAddInfo = () => {
-        axios
-            .post(`${baseUrl}/aboutUsInfo/`, infoData, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            })
-            .then(function (response) {
-                if (!response.data.error) {
-                    Swal.fire({
-                        position: "center",
-                        icon: "success",
-                        title: "Succses",
-                        showConfirmButton: false,
-                        timer: 1500,
-                    });
-                    setRend(!rend);
                 }
             })
             .catch(function (error) {
@@ -356,149 +318,39 @@ const AboutUs = () => {
                     })
                 }
             </Box>
-            <Box m={3}>
-                <h2 mt={3} mb={3}>
-                    About Us Info Settings
-                </h2>
-                <Box sx={{width: "100%"}}>
-                    {aboutUsInfo.map((i, index) => {
-                        return (
-                            <div key={index}>
-                                <p>
-                                    <strong>{index + 1}</strong>
-                                </p>
-                                <hr className="hrLine"/>
-                                <h3>{i.titleHy}</h3>
-                                <p>{i.textHy}</p>
-                                <h3>{i.titleRu}</h3>
-                                <p>{i.textRu}</p>
-                                <h3>{i.titleEn}</h3>
-                                <p>{i.textEn}</p>
-                                <hr/>
+           <AboutUsInfo aboutUsInfo={aboutUsInfo} setRend={setRend} rend={rend}/>
+            <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+                <Box sx={style}>
+                    <Typography id="modal-modal-title" variant="h6" component="h2">
+                        Edit this Image
+                    </Typography>
+                    <div className="imageArea">
+                        <div>
+                            <div className="uploadBtns">
+                                <Button color="secondary" variant="contained" component="label">
+                                    Upload Image
+                                    <input type="file" hidden multiple onChange={handleFile}/>
+                                </Button>
                             </div>
-                        );
-                    })}
-                </Box>
-                <Box sx={{width: "100%"}}>
-                    <Box sx={{borderBottom: 1, borderColor: "divider"}}>
-                        <Tabs
-                            value={infoOpen}
-                            onChange={handleOpenInfoTabs}
-                            aria-label="basic tabs example"
-                            textColor="secondary"
-                            indicatorColor="secondary"
-                        >
-                            <Tab label="Item One" {...a11yProps(0)} />
-                            <Tab label="Item Two" {...a11yProps(1)} />
-                            <Tab label="Item Three" {...a11yProps(2)} />
-                        </Tabs>
-                    </Box>
-                    <TabPanel value={infoOpen} index={0}>
-                        <TextField
-                            id="standard-basic"
-                            defaultValue={
-                                aboutUsInfo.length == 0 ? null : aboutUsInfo.titleHy
-                            }
-                            name="titleHy"
-                            onChange={handleInfoChangeValues}
-                            label="Hy"
-                            variant="standard"
-                        />
-                        <br/>
-                        <textarea
-                            id="w3review"
-                            name="textHy"
-                            rows="8"
-                            onChange={handleInfoChangeValues}
-                            maxLength="600"
-                            cols="60"
-                            defaultValue={aboutUsInfo.length == 0 ? null : aboutUsInfo.textHy}
-                            className="textareaText"
-                        />
-                    </TabPanel>
-                    <TabPanel value={infoOpen} index={1}>
-                        <TextField
-                            id="standard-basic"
-                            defaultValue={
-                                aboutUsInfo.length == 0 ? null : aboutUsInfo.titleHy
-                            }
-                            name="titleRu"
-                            onChange={handleInfoChangeValues}
-                            label="Ru"
-                            variant="standard"
-                        />
-                        <br/>
-                        <textarea
-                            id="w3review"
-                            name="textRu"
-                            rows="8"
-                            onChange={handleInfoChangeValues}
-                            maxLength="600"
-                            cols="60"
-                            defaultValue={aboutUsInfo.length == 0 ? null : aboutUsInfo.textHy}
-                            className="textareaText"
-                        />
-                    </TabPanel>
-                    <TabPanel value={infoOpen} index={2}>
-                        <TextField
-                            id="standard-basic"
-                            defaultValue={
-                                aboutUsInfo.length == 0 ? null : aboutUsInfo.titleRu
-                            }
-                            name="titleEn"
-                            onChange={handleInfoChangeValues}
-                            label="En"
-                            variant="standard"
-                        />
-                        <br/>
-                        <textarea
-                            id="w3review"
-                            name="textEn"
-                            rows="8"
-                            onChange={handleInfoChangeValues}
-                            maxLength="600"
-                            cols="60"
-                            defaultValue={aboutUsInfo.length == 0 ? null : aboutUsInfo.textEn}
-                            className="textareaText"
-                        />
-                    </TabPanel>
-                </Box>
-                <Button color="secondary" variant="contained" onClick={handleAddInfo}>
-                    Submit
-                </Button>
-                <Modal
-                    open={open}
-                    onClose={handleClose}
-                    aria-labelledby="modal-modal-title"
-                    aria-describedby="modal-modal-description"
-                >
-                    <Box sx={style}>
-                        <Typography id="modal-modal-title" variant="h6" component="h2">
-                           Edit this Image
-                        </Typography>
-                        <div className="imageArea">
-                            <div>
-                                <div className="uploadBtns">
-                                    <Button color="secondary" variant="contained" component="label">
-                                        Upload Image
-                                        <input type="file" hidden multiple onChange={handleFile}/>
-                                    </Button>
-                                </div>
-                                <div className="uploadBtns" m={2}>
-                                    <Button  color="secondary" variant="contained" onClick={handleEditImage}>
-                                        Submit
-                                    </Button>
-                                </div>
-                            </div>
-                            <div className="uploadImageAreaInModal">
-                                {thisImg !== null && (
-                                    <img src={thisImg} alt="newImage" width={300} height={200}/>
-                                )}
+                            <div className="uploadBtns" m={2}>
+                                <Button  color="secondary" variant="contained" onClick={handleEditImage}>
+                                    Submit
+                                </Button>
                             </div>
                         </div>
-                    </Box>
-                </Modal>
-            </Box>
+                        <div className="uploadImageAreaInModal">
+                            {thisImg !== null && (
+                                <img src={thisImg} alt="newImage" width={300} height={200}/>
+                            )}
+                        </div>
+                    </div>
+                </Box>
+            </Modal>
         </Box>
     );
 };

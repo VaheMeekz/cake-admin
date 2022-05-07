@@ -3,8 +3,8 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
-import { baseUrl, token } from "../../api/userApi";
-import { getInfoThunk } from "../../store/actiions/infoAction";
+import { baseUrl, token } from "../../config/config";
+import { getInfoThunk } from "../../store/actions/infoAction";
 import "./info.scss";
 const Info = () => {
   const dispatch = useDispatch();

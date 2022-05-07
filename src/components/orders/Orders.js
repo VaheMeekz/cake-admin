@@ -1,7 +1,7 @@
 import {Box, Button, DialogActions} from "@mui/material";
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {getOrdersThunk} from "../../store/actiions/orderAction";
+import {getOrdersThunk} from "../../store/actions/orderAction";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
 import Table from "@mui/material/Table";
@@ -20,7 +20,7 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Modal from "@mui/material/Modal";
 import axios from "axios";
-import {baseUrl, token} from "../../api/userApi";
+import {baseUrl, token} from "../../config/config";
 import Swal from "sweetalert2";
 
 const style = {
@@ -168,7 +168,6 @@ const Orders = () => {
     const dispatch = useDispatch();
     const limit = 4;
     const data = useSelector((state) => state.orderReducer.orders);
-    console.log(data,"...........");
     const count = useSelector((state) => state.orderReducer.count);
     const [page, setPage] = useState(0);
     const [pages, setPages] = useState([]);

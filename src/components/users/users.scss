@@ -6,6 +6,21 @@
   display: flex;
   margin-top: 10px;
 }
+.col{
+  margin: 15px 0 15px 0;
+}
+.fields{
+  outline: none;
+  padding: 10px;
+  border-radius: 5px;
+  width: 90%;
+  margin: 5px auto;
+  font-size: 18px;
+}
+.invalid-feedback{
+  color: maroon;
+  font-size: 18px;
+}
 
 .pagItem {
   width: 21px;

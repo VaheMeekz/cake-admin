@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import {Box, Button, DialogActions, TextField} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
-import {getAboutFooterThunk} from "../../store/actiions/footerAction";
+import {getAboutFooterThunk} from "../../store/actions/footerAction";
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import axios from "axios";
-import {baseUrl, token} from "../../api/userApi";
+import {baseUrl, token} from "../../config/config";
 import Swal from "sweetalert2";
 import Modal from "@mui/material/Modal";
 

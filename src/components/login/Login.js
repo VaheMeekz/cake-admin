@@ -5,15 +5,13 @@ import { Formik } from "formik";
 import "./login.scss";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { thchangeAuAC } from "../../store/actiions/authAction";
+import { thchangeAuAC } from "../../store/actions/authAction";
 import Swal from "sweetalert2";
-import { baseUrl } from "../../api/userApi";
-import { useNavigate } from 'react-router-dom';
+import { baseUrl } from "../../config/config";
 
 
 const Login = () => {
   const dispatch = useDispatch();
-  let navigate = useNavigate();
   const validate = Yup.object({
     email: Yup.string().email("Email is invalid").required("Email is required"),
     password: Yup.string()
@@ -47,7 +45,8 @@ const Login = () => {
                 } else {
                   dispatch(thchangeAuAC(true));
                   localStorage.setItem('myToken',JSON.stringify(response.data.token))
-                  navigate('/')
+                  localStorage.setItem('email',JSON.stringify(response.data.email))
+                  window.location.href='/users'
                 }
               })
               .catch(function (error) {
@@ -93,7 +92,7 @@ const Login = () => {
                   )}
                 </div>
                 <div>
-                  <Button type="submit" variant="contained">
+                  <Button type="submit" variant="contained" color="secondary">
                     Login
                   </Button>
                 </div>

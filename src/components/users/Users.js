@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getCountriesThunk } from "../../store/actiions/usersAction";
+import { getCountriesThunk } from "../../store/actions/usersAction";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -19,7 +19,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogTitle from "@mui/material/DialogTitle";
 import {Button, TextField} from "@mui/material";
 import axios from "axios";
-import { baseUrl, token } from "../../api/userApi";
+import { baseUrl, token } from "../../config/config";
 import Swal from "sweetalert2";
 
 const Users = () => {
