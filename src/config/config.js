@@ -1,5 +1,5 @@
-// export const baseUrl = "https://newcake.herokuapp.com/api/v1";
-export const baseUrl = "http://localhost:5000/api/v1";
+ export const baseUrl = "https://newcake.herokuapp.com/api/v1";
+//export const baseUrl = "http://localhost:5000/api/v1";
 export const token = JSON.parse(localStorage.getItem("myToken"));
 export const email = JSON.parse(localStorage.getItem("email"));
 export const CLOUDINARY_PRESENT = "qtfygrwo";
