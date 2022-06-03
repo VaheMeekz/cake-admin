@@ -26,7 +26,7 @@ const Sidebar = () => {
                     {isAuth
                         ? isAuthPages.map(({id, path, name,icon}) => {
                             return (
-                                <div>
+                                <div key={id}>
                                 <Link to={path} style={{textDecoration: "none"}} key={id}
                                     className={location.pathname === path ? "activeLink" : "pasiveLink"}
                                 >

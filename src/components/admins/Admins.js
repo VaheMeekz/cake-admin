@@ -72,8 +72,11 @@ const Admins = () => {
                         timer: 1500,
                     });
                     setOpen(false);
-                    setData(response.data);
-                    console.log(response.data);
+                    // setData(response.data);
+                    // console.log(response.data);
+                    setTimeout(() => {
+                        window.location.reload(false);
+                    }, 1000)
                 }
             })
             .catch(function (error) {
@@ -103,7 +106,7 @@ const Admins = () => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {data && data.map((row) => (
+                            {data && data?.map((row) => (
                                 <TableRow
                                     key={row.id}
                                     sx={{'&:last-child td, &:last-child th': {border: 0}}}
@@ -200,7 +203,7 @@ const Admins = () => {
                                                 showConfirmButton: false,
                                                 timer: 1500,
                                             });
-                                            setData(response.data);
+                                            setData((prev) => [...prev, response.data]);
                                             setOPenAdd(false);
                                         }
                                     })
@@ -250,7 +253,7 @@ const Admins = () => {
                         </Formik>
                     </Box>
                     <DialogActions>
-                        <Button onClick={() => setOPenAdd(false)} variant="outlined" color="secondary">Cancle</Button>
+                        <Button onClick={() => setOPenAdd(false)} variant="outlined" color="secondary">Cancel</Button>
                     </DialogActions>
                 </Box>
             </Modal>
