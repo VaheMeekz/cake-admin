@@ -43,7 +43,7 @@ function Row(props) {
     const handleDelete = () => {
         axios
             .post(
-                `${baseUrl}/basket/delete-admin`,
+                `${baseUrl}/orders/deleteItem`,
                 {
                     id: currentId,
                 },
@@ -87,8 +87,8 @@ function Row(props) {
                 <TableCell component="th" scope="row">
                     {row.id}
                 </TableCell>
-                <TableCell align="left">{row.User?.name}</TableCell>
-                <TableCell align="left">{row.User?.email}</TableCell>
+                <TableCell align="left">{row?.firstName}</TableCell>
+                <TableCell align="left">{row?.email}</TableCell>
                 <TableCell align="left">
                     <DeleteIcon
                         onClick={() => {
@@ -171,7 +171,6 @@ const Orders = () => {
     const count = useSelector((state) => state.orderReducer.count);
     const [page, setPage] = useState(0);
     const [pages, setPages] = useState([]);
-
     useEffect(() => {
         dispatch(getOrdersThunk(page, limit));
     }, [page, limit]);
@@ -193,7 +192,7 @@ const Orders = () => {
                         <TableRow>
                             <TableCell/>
                             <TableCell align="left">#</TableCell>
-                            <TableCell align="left">f Name</TableCell>
+                            <TableCell align="left">First Name</TableCell>
                             <TableCell align="left">Email</TableCell>
                             <TableCell align="left">Delete</TableCell>
                         </TableRow>
